@@ -1,0 +1,64 @@
+[
+  {
+    "country": "Bangladesh",
+    "process_name": "Opening a Savings Account in Bangladesh",
+    "steps": [
+      "Choose a bank and account type",
+      "Visit a branch in person",
+      "Provide National ID (NID) or passport, and a passport-size photo",
+      "Provide a nominee's details",
+      "Get an introducer (existing account holder to vouch for you)",
+      "Deposit the minimum opening balance",
+      "Receive a passbook and/or debit card"
+    ],
+    "typical_requirements": ["National ID or passport", "Passport-size photo", "Nominee details", "Introducer/reference", "Minimum opening deposit"],
+    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
+    "source_notes": "DUMMY DATA"
+  },
+  {
+    "country": "India",
+    "process_name": "Opening a Savings Account in India",
+    "steps": [
+      "Choose a bank and account type",
+      "Complete KYC — provide Aadhaar and PAN card",
+      "Apply online or in-branch via video KYC",
+      "Provide a passport-size photo and signature",
+      "Fund the account with the minimum balance if required",
+      "Receive a debit card and net/mobile banking access"
+    ],
+    "typical_requirements": ["Aadhaar card", "PAN card", "Passport-size photo", "Minimum balance (varies)"],
+    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
+    "source_notes": "DUMMY DATA"
+  },
+  {
+    "country": "Philippines",
+    "process_name": "Opening a Savings Account in the Philippines",
+    "steps": [
+      "Choose a bank (traditional or digital-only)",
+      "Provide at least one valid government ID",
+      "Provide Tax Identification Number (TIN) if available",
+      "Visit a branch or complete online application with selfie/video verification",
+      "Fund the account with the minimum initial deposit",
+      "Receive an ATM/debit card"
+    ],
+    "typical_requirements": ["Valid government ID", "TIN (if available)", "Minimum initial deposit", "Selfie/video verification for digital banks"],
+    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
+    "source_notes": "DUMMY DATA"
+  },
+  {
+    "country": "United States",
+    "process_name": "Opening a Savings Account in the US (as a newcomer)",
+    "steps": [
+      "Choose a bank (traditional, credit union, or online-only)",
+      "Provide a government-issued ID (passport + visa for newcomers)",
+      "Provide SSN, ITIN, or use a bank that accepts foreign passport/visa alone",
+      "Provide a US address (some banks accept temporary/campus address)",
+      "Apply online or in-branch",
+      "Fund the account with the minimum opening deposit if required",
+      "Receive a debit card by mail or immediate digital access"
+    ],
+    "typical_requirements": ["Government-issued ID (passport + visa)", "SSN or ITIN (or bank-specific alternative)", "US address", "Minimum opening deposit (varies)"],
+    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
+    "source_notes": "DUMMY DATA"
+  }
+]

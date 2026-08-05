@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bd_fdr",
+    "country": "Bangladesh",
+    "product_name_local": "Fixed Deposit Receipt (FDR)",
+    "local_terms": ["FDR", "Fixed Deposit Receipt"],
+    "description": "A lump-sum deposit locked in for a fixed term at a fixed interest rate. No partial withdrawals; breaking early usually drops the rate to the savings account rate.",
+    "key_features": ["Lump-sum, one-time deposit", "Fixed term (1-24 months common)", "Fixed guaranteed interest rate", "Loan available against FDR"],
+    "closest_us_equivalent": "Certificate of Deposit (CD)",
+    "similarity_notes": "Both lock a lump sum for a fixed term at a fixed rate, and both penalize early withdrawal.",
+    "difference_notes": "US CDs are FDIC-insured up to $250,000; FDR is insured only up to BDT 200,000 under Bangladesh's deposit insurance scheme.",
+    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+  },
+  {
+    "id": "in_fd",
+    "country": "India",
+    "product_name_local": "Fixed Deposit (FD)",
+    "local_terms": ["FD", "Fixed Deposit", "Term Deposit"],
+    "description": "A lump-sum deposit for a fixed tenure at a fixed interest rate, with principal and interest paid at maturity.",
+    "key_features": ["Lump-sum deposit", "Tenure from 7 days to 10 years", "Fixed interest rate for the term", "TDS applies above a threshold"],
+    "closest_us_equivalent": "Certificate of Deposit (CD)",
+    "similarity_notes": "Same core mechanic: lock a lump sum for a fixed term at a fixed guaranteed rate.",
+    "difference_notes": "Indian FD interest is subject to TDS withheld directly by the bank; US CD interest is reported via 1099-INT and taxed at annual filing.",
+    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+  },
+  {
+    "id": "ph_time_deposit",
+    "country": "Philippines",
+    "product_name_local": "Time Deposit",
+    "local_terms": ["Time Deposit", "TD"],
+    "description": "A lump-sum deposit locked for a fixed term at a fixed interest rate, with a 20% final withholding tax on interest.",
+    "key_features": ["Lump-sum deposit", "Term from 30 days to 5 years", "Fixed rate, typically 1.5%-4.0% p.a.", "20% final withholding tax on interest"],
+    "closest_us_equivalent": "Certificate of Deposit (CD)",
+    "similarity_notes": "Same core mechanic: lump sum locked for a fixed term at a fixed rate.",
+    "difference_notes": "Philippine time deposit interest is taxed automatically at the bank; US CD interest is reported for the holder to pay tax on annually.",
+    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+  },
+  {
+    "id": "us_cd",
+    "country": "United States",
+    "product_name_local": "Certificate of Deposit (CD)",
+    "local_terms": ["CD", "Certificate of Deposit"],
+    "description": "A lump-sum deposit locked for a fixed term at a fixed interest rate, with an early-withdrawal penalty.",
+    "key_features": ["Lump-sum deposit", "Fixed term, fixed rate", "FDIC-insured up to $250,000", "Early withdrawal penalty"],
+    "closest_us_equivalent": "N/A (US reference product)",
+    "similarity_notes": "N/A",
+    "difference_notes": "N/A",
+    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+  }
+]
