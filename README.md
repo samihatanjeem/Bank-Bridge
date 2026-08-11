@@ -15,7 +15,8 @@ Philippines, South Korea, the United Kingdom, and Vietnam. Free-text mapping
 uses an explainable hybrid matcher with fuzzy aliases, product mechanics,
 intent cues, and a multinomial Naive Bayes signal. Low-confidence inputs fall
 back safely. Users can select any covered market other than their home country
-as the destination.
+as the destination. The account-opening guide provides tailored checklists for
+everyday spending, savings, high-yield savings, fixed-term, and basic accounts.
 
 ## Project structure
 
@@ -27,6 +28,7 @@ bank-bridge/
 │   ├── 2_Process_Comparison.py
 │   └── 3_Statement_Guide.py
 ├── utils/
+│   ├── account_guidance.py
 │   ├── data_loader.py
 │   ├── product_classifier.py
 │   └── ai_helper.py

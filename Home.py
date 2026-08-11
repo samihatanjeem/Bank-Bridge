@@ -65,7 +65,7 @@ cards = [
     (
         "02",
         "Open your first account",
-        "Compare the documents and steps at home with what a bank in your destination may ask for.",
+        "Choose checking, savings, high-yield, fixed-term, or basic—then get a destination-ready checklist.",
         "pages/2_Process_Comparison.py",
         "Compare the process",
     ),

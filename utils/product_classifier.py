@@ -146,6 +146,38 @@ def find_destination_product(
     return DestinationMatch(selected, category, bool(direct_candidates))
 
 
+def find_product_for_category(
+    products: List[dict], country: str, category: str
+) -> DestinationMatch:
+    """Find a reviewed local product for a country-neutral account category."""
+    country_products = get_products_for_country(products, country)
+    direct_candidates = [
+        product for product in country_products if product_category(product) == category
+    ]
+    if direct_candidates:
+        if category == "savings":
+            savings_named = [
+                product
+                for product in direct_candidates
+                if "saving" in product["product_name_local"].lower()
+            ]
+            direct_candidates = savings_named or direct_candidates
+        return DestinationMatch(direct_candidates[0], category, True)
+
+    fallback_categories = {
+        "basic_account": "transactions",
+        "recurring_savings": "savings",
+    }
+    fallback_category = fallback_categories.get(category)
+    fallback_candidates = [
+        product
+        for product in country_products
+        if fallback_category and product_category(product) == fallback_category
+    ]
+    product = fallback_candidates[0] if fallback_candidates else None
+    return DestinationMatch(product, category, False)
+
+
 def _words(text: str) -> List[str]:
     folded = "".join(
         character

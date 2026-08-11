@@ -2,6 +2,7 @@ import json
 import unittest
 from pathlib import Path
 
+from utils.account_guidance import account_profile, account_type_options, tailored_steps
 from utils.data_loader import (
     find_product_by_term,
     get_process_for_country,
@@ -11,6 +12,7 @@ from utils.data_loader import (
 from utils.product_classifier import (
     classify_product,
     find_destination_product,
+    find_product_for_category,
     product_category,
 )
 
@@ -168,6 +170,42 @@ class ClassifierTests(unittest.TestCase):
         match = find_destination_product(self.products, origin, "Philippines")
         self.assertEqual(product_category(match.product), "savings")
         self.assertFalse(match.direct_category)
+
+
+class AccountGuidanceTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.products = load_financial_products()
+        cls.processes = load_account_opening_process()
+
+    def test_every_account_type_resolves_in_every_country(self):
+        countries = {process["country"] for process in self.processes}
+        for account_type in account_type_options():
+            category = account_profile(account_type)["category"]
+            for country in countries:
+                with self.subTest(account_type=account_type, country=country):
+                    match = find_product_for_category(
+                        self.products, country, category
+                    )
+                    self.assertIsNotNone(match.product)
+
+    def test_high_yield_uses_local_savings_product(self):
+        category = account_profile("High-yield savings (HYSA)")["category"]
+        match = find_product_for_category(self.products, "United Kingdom", category)
+        self.assertEqual(match.product["id"], "uk_easy_access")
+
+    def test_product_decision_precedes_funding(self):
+        process = get_process_for_country(self.processes, "United States")
+        result = tailored_steps(
+            process, "Fixed-term deposit / CD", "Certificate of Deposit (CD)"
+        )
+        decision_index = next(
+            index for index, step in enumerate(result) if "maturity instructions" in step
+        )
+        funding_index = next(
+            index for index, step in enumerate(result) if "first deposit" in step
+        )
+        self.assertLess(decision_index, funding_index)
 
 
 if __name__ == "__main__":
