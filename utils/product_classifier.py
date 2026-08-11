@@ -7,6 +7,7 @@ avoids committing an opaque binary model.
 
 import math
 import re
+import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from difflib import SequenceMatcher
@@ -15,7 +16,38 @@ from typing import Dict, Iterable, List, Optional
 from utils.data_loader import get_products_for_country
 
 
-TOKEN_RE = re.compile(r"[a-z0-9]+")
+TOKEN_RE = re.compile(r"[^\W_]+", re.UNICODE)
+
+STOP_WORDS = {
+    "a", "account", "an", "and", "bank", "banking", "for", "from", "i",
+    "in", "is", "it", "money", "my", "of", "or", "the", "to", "with",
+}
+
+CATEGORY_CUES = {
+    "savings": (
+        "access anytime", "easy access", "emergency fund", "instant access",
+        "passbook", "rainy day", "save money", "withdraw anytime",
+    ),
+    "transactions": (
+        "bill", "business payment", "check", "cheque", "daily spending",
+        "debit card", "everyday", "payroll", "receive salary", "salary", "use daily",
+        "transfer", "nomina", "payment",
+    ),
+    "fixed_term": (
+        "certificate", "deposit until", "fixed deposit", "fixed rate",
+        "fixed term", "lock money", "locked", "lump sum", "maturity",
+        "a plazo", "plazo fijo", "term deposit", "time deposit",
+    ),
+    "recurring_savings": (
+        "automatic saving", "cada mes", "every month", "goal", "installment",
+        "monthly", "periodic", "programado", "recurring", "regular saver",
+        "scheduled transfer",
+    ),
+    "basic_account": (
+        "basic account", "financial inclusion", "low cost", "no fee",
+        "no maintaining balance", "no minimum", "no frills", "zero balance",
+    ),
+}
 
 
 @dataclass
@@ -115,7 +147,12 @@ def find_destination_product(
 
 
 def _words(text: str) -> List[str]:
-    words = TOKEN_RE.findall(text.lower())
+    folded = "".join(
+        character
+        for character in unicodedata.normalize("NFKD", text.lower())
+        if not unicodedata.combining(character)
+    )
+    words = TOKEN_RE.findall(folded)
     # A compact normalization is enough for product-language plurals without
     # adding a heavyweight NLP dependency to the Streamlit deployment.
     normalized = []
@@ -206,6 +243,65 @@ def _name_similarity(query: str, product: dict) -> float:
     )
 
 
+def _contains_known_name(query: str, product: dict) -> bool:
+    """Recognize an alias inside a longer phrase without partial-word matches."""
+    query_words = _words(query)
+    for name in [product["product_name_local"]] + product.get("local_terms", []):
+        name_words = _words(name)
+        if not name_words:
+            continue
+        if _contains_word_sequence(query_words, name_words):
+            return True
+    return False
+
+
+def _contains_word_sequence(words: List[str], phrase: List[str]) -> bool:
+    width = len(phrase)
+    return any(
+        words[index:index + width] == phrase
+        for index in range(len(words) - width + 1)
+    )
+
+
+def _lexical_similarity(query: str, product: dict) -> float:
+    """Score useful query words against names, aliases, and product mechanics."""
+    query_words = [word for word in _words(query) if word not in STOP_WORDS]
+    if not query_words:
+        return 0.0
+    document = " ".join(
+        [product["product_name_local"]]
+        + product.get("local_terms", [])
+        + [product.get("description", "")]
+        + product.get("key_features", [])
+    )
+    document_words = set(_words(document))
+    matched = []
+    for query_word in query_words:
+        best = max(
+            (SequenceMatcher(None, query_word, word).ratio() for word in document_words),
+            default=0.0,
+        )
+        matched.append(best if best >= 0.78 else 0.0)
+    return sum(matched) / len(matched)
+
+
+def _intent_scores(query: str) -> Dict[str, float]:
+    query_words = _words(query)
+    scores = {}
+    for category, cues in CATEGORY_CUES.items():
+        hits = sum(
+            1 for cue in cues if _contains_word_sequence(query_words, _words(cue))
+        )
+        scores[category] = 1.0 if hits else 0.0
+    if any(
+        _contains_word_sequence(query_words, _words(phrase))
+        for phrase in ("monthly income", "monthly payout")
+    ):
+        scores["recurring_savings"] = 0.0
+        scores["savings"] = 1.0
+    return scores
+
+
 def classify_product(
     products: List[dict],
     country: str,
@@ -242,23 +338,57 @@ def classify_product(
             [product for _, product in ranked_names[1:3]],
         )
 
+    contained_products = [
+        product for product in country_products if _contains_known_name(query, product)
+    ]
+    if len(contained_products) == 1:
+        product = contained_products[0]
+        return MappingResult(
+            product,
+            product["closest_us_equivalent"],
+            0.98,
+            "alias",
+            [
+                candidate
+                for _, candidate in ranked_names
+                if candidate["id"] != product["id"]
+            ][:2],
+        )
+
     classifier = classifier or ProductMappingClassifier(country_products)
     probabilities = classifier.probabilities(query)
     if not probabilities:
         return MappingResult(None, None, 0.0, "no_match", [])
 
-    ranked_labels = sorted(probabilities.items(), key=lambda item: item[1], reverse=True)
-    label, probability = ranked_labels[0]
-    matching_products = [
-        item for item in ranked_names if item[1]["closest_us_equivalent"] == label
-    ]
-    best_product = matching_products[0][1] if matching_products else ranked_names[0][1]
+    intents = _intent_scores(query)
+    scored_products = []
+    for name_score, product in ranked_names:
+        category = product_category(product)
+        model_score = probabilities.get(product["closest_us_equivalent"], 0.0)
+        lexical_score = _lexical_similarity(query, product)
+        score = (
+            (0.25 * name_score)
+            + (0.25 * lexical_score)
+            + (0.40 * intents[category])
+            + (0.10 * model_score)
+        )
+        scored_products.append((score, product))
 
-    # Blend model probability and surface-name similarity. This is displayed as
-    # a routing confidence, not a statistical guarantee of financial equivalence.
-    name_score = matching_products[0][0] if matching_products else 0.0
-    confidence = (0.75 * probability) + (0.25 * name_score)
-    alternatives = [product for _, product in ranked_names if product["id"] != best_product["id"]][:2]
+    scored_products.sort(key=lambda item: item[0], reverse=True)
+    confidence, best_product = scored_products[0]
+    alternatives = [product for _, product in scored_products[1:3]]
     if confidence < minimum_confidence:
-        return MappingResult(None, label, confidence, "low_confidence", alternatives)
-    return MappingResult(best_product, label, confidence, "model", alternatives)
+        return MappingResult(
+            None,
+            best_product["closest_us_equivalent"],
+            confidence,
+            "low_confidence",
+            alternatives,
+        )
+    return MappingResult(
+        best_product,
+        best_product["closest_us_equivalent"],
+        confidence,
+        "hybrid",
+        alternatives,
+    )

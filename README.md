@@ -12,9 +12,10 @@ The term and process pages use sourced seed data for 10 origin countries plus
 the United States as a destination market:
 Bangladesh, China, the Dominican Republic, El Salvador, India, Mexico, the
 Philippines, South Korea, the United Kingdom, and Vietnam. Free-text mapping
-uses an explainable multinomial Naive Bayes classifier with a low-confidence
-fallback. Users can select any covered market other than their home country as
-the destination.
+uses an explainable hybrid matcher with fuzzy aliases, product mechanics,
+intent cues, and a multinomial Naive Bayes signal. Low-confidence inputs fall
+back safely. Users can select any covered market other than their home country
+as the destination.
 
 ## Project structure
 
@@ -56,8 +57,9 @@ python -m unittest discover -s tests -v
 ```
 
 The model trains from the small JSON dataset at runtime, so there is no opaque
-serialized model artifact. The training text consists of product names,
-aliases, descriptions, and stable product mechanics. A reviewed canonical
+serialized model artifact. It combines fuzzy name matching, Unicode-aware
+lexical similarity, explicit product-mechanics cues, and Naive Bayes trained on
+names, aliases, descriptions, and stable features. A reviewed canonical
 category then routes the result to the closest product in the chosen
 destination. The UI links both sides of each result back to their evidence.
 

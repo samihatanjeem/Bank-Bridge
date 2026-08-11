@@ -87,6 +87,33 @@ class ClassifierTests(unittest.TestCase):
         self.assertIsNone(result.product)
         self.assertEqual(result.method, "low_confidence")
 
+    def test_typo_is_recovered(self):
+        result = classify_product(self.products, "Bangladesh", "fixd deposit")
+        self.assertEqual(result.product["id"], "bd_fdr")
+
+    def test_natural_language_intents(self):
+        cases = [
+            ("Bangladesh", "I put money in every month", "bd_dps"),
+            ("Bangladesh", "I can withdraw anytime", "bd_savings"),
+            ("India", "lock money for 2 years", "in_fd"),
+            ("Mexico", "cuenta para recibir nomina", "mx_transaction"),
+            ("Mexico", "ahorrar cada mes", "mx_goal_savings"),
+            ("United Kingdom", "pay salary and bills", "uk_current"),
+        ]
+        for country, query, product_id in cases:
+            with self.subTest(country=country, query=query):
+                result = classify_product(self.products, country, query)
+                self.assertEqual(result.product["id"], product_id)
+
+    def test_unicode_alias_is_preserved(self):
+        result = classify_product(self.products, "China", "定期存款")
+        self.assertEqual(result.product["id"], "cn_time_deposit")
+
+    def test_alias_inside_a_sentence_is_recognized(self):
+        result = classify_product(self.products, "India", "I used to have an RD")
+        self.assertEqual(result.product["id"], "in_rd")
+        self.assertEqual(result.method, "alias")
+
     def test_new_country_mappings(self):
         cases = [
             ("China", "fixed lump sum until maturity", "Certificate of Deposit (CD)"),

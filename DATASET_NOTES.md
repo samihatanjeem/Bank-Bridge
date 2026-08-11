@@ -29,10 +29,11 @@ steps, typical requirements, qualifications in `notes`, and a `sources` list.
 
 ## How the classifier uses the data
 
-`utils/product_classifier.py` trains a multinomial Naive Bayes text classifier
-at runtime. Names, aliases, descriptions, and key features are training text;
-`closest_us_equivalent` is the label. Keeping them together means every model
-output resolves to the reviewed evidence displayed in the UI.
+`utils/product_classifier.py` uses a lightweight hybrid matcher at runtime. It
+combines exact and fuzzy aliases, Unicode-aware lexical similarity, explicit
+product-mechanics cues, and a multinomial Naive Bayes signal trained from names,
+descriptions, and key features. Keeping these signals tied to reviewed records
+means every output resolves to the evidence displayed in the UI.
 
 Add varied aliases and stable mechanics rather than current rates. Every new
 US-equivalent label should have examples in more than one country where
