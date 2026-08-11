@@ -30,9 +30,9 @@ with left:
     with secondary:
         st.page_link("pages/2_Process_Comparison.py", label="Compare account opening", icon=None)
     st.markdown(
-        '<div class="trust-row"><span class="trust-item">No sign-up</span>'
+        '<div class="trust-row"><span class="trust-item">10 home countries</span>'
         '<span class="trust-item">Sources included</span>'
-        '<span class="trust-item">No financial advice</span></div>',
+        '<span class="trust-item">No sign-up</span></div>',
         unsafe_allow_html=True,
     )
 

@@ -1,0 +1,135 @@
+[
+  {
+    "country": "China",
+    "process_name": "Opening a Personal Bank Account in China",
+    "steps": [
+      "Choose a bank and the account's payment or savings purpose",
+      "Visit a supported branch or begin through a bank's available digital channel",
+      "Provide a resident identity card; foreign nationals generally provide a passport or permanent-residence card",
+      "Provide supporting identity, residence, tax, or contact information if the bank cannot complete verification from the primary document",
+      "Complete real-name and customer-due-diligence checks",
+      "Fund the account if the product requires an opening deposit",
+      "Activate the bank card and mobile-payment or online-banking services offered"
+    ],
+    "typical_requirements": ["Valid identity document", "Contact information", "Supporting proof of address or identity if requested", "Account purpose", "Opening deposit if required"],
+    "notes": "Chinese banks must verify the applicant, the identity document, and the applicant's genuine intention to open the account. Exact supporting documents and digital-channel access vary by bank and customer status.",
+    "sources": [
+      {"title": "Beijing government guide to personal bank-account identification", "url": "https://english.bjsjs.gov.cn/services/servicespayment/202303/t20230321_68061.html"},
+      {"title": "People's Bank of China settlement-account rules", "url": "https://www.pbc.gov.cn/en/3688253/3689009/3788456/2025092319414236829/index.html"}
+    ]
+  },
+  {
+    "country": "Mexico",
+    "process_name": "Opening a Personal Deposit Account in Mexico",
+    "steps": [
+      "Choose a traditional or simplified deposit account based on the transactions and balances you expect",
+      "Check whether the institution supports branch or digital opening for that product",
+      "Complete the application with personal, contact, occupation, and residence information requested by the bank",
+      "Provide valid official identification and CURP when required",
+      "Provide proof of address when required for the selected account level",
+      "Fund the account if the product has an opening minimum",
+      "Receive the debit card and CLABE used for transfers"
+    ],
+    "typical_requirements": ["Official identification", "CURP when required", "Proof of address for some accounts", "Mobile number and contact details", "Opening deposit if required"],
+    "notes": "CONDUSEF distinguishes simplified accounts with lower information requirements and traditional accounts with fuller customer files. Limits and accepted documents depend on the account level and institution.",
+    "sources": [
+      {"title": "CONDUSEF guidance on opening deposit accounts", "url": "https://www.condusef.gob.mx/?idc=830&idcat=1&p=contenido"},
+      {"title": "Mexico Te Emplea bank-account guide", "url": "https://mexicoteemplea.gob.mx/Micrositio/HTML/cuenta-banceria.html"}
+    ]
+  },
+  {
+    "country": "Vietnam",
+    "process_name": "Opening a Personal Payment Account in Vietnam",
+    "steps": [
+      "Choose a bank and decide whether you need a payment account, savings deposit, or both",
+      "Check whether the bank supports branch or electronic opening for your customer type",
+      "Complete the bank's account-opening application and register customer information",
+      "Provide the current identity document required for your citizenship or residence status",
+      "Complete identity verification and any required biometric matching",
+      "Provide address, contact, and account-purpose information requested by the bank",
+      "Activate the payment card and digital-banking services available"
+    ],
+    "typical_requirements": ["Current accepted identity document", "Mobile number and contact details", "Registered address", "Biometric verification when applicable", "Additional bank-specific KYC information"],
+    "notes": "Identity-document rules changed for Vietnamese citizens from January 2026, so older guides referring to domestic passport use may be outdated. Confirm the current document and biometric requirements with the chosen bank.",
+    "sources": [
+      {"title": "Vietnam government notice on 2026 bank identity rules", "url": "https://en.baochinhphu.vn/banks-to-discontinue-passport-based-transactions-from-2026-111251222104858203.htm"},
+      {"title": "State Bank of Vietnam account-opening regulation", "url": "https://vbpl.vn/nganhangnhanuoc/Pages/vbpqen-toanvan.aspx?ItemID=9772&dvid=326"}
+    ]
+  },
+  {
+    "country": "South Korea",
+    "process_name": "Opening a Personal Bank Account in South Korea",
+    "steps": [
+      "Choose a bank and account type",
+      "Check whether the account must be opened at a branch or supports a digital channel",
+      "Provide a resident registration card or the identity documents applicable to your residence status",
+      "Provide a Korean address and contact information when requested",
+      "Explain and document the financial purpose of the account, such as salary receipt",
+      "Open a transaction-limited account if full purpose documentation is not yet available",
+      "Apply for a card and digital banking, then provide later evidence if needed to lift limits"
+    ],
+    "typical_requirements": ["Valid identity document", "Korean address and contact information", "Evidence of financial-transaction purpose", "Signature or seal as accepted by the bank", "Additional residence documentation when applicable"],
+    "notes": "Korean banks may open an initially restricted account when transaction-purpose evidence is incomplete. Documents and limits vary by bank, account, and residence status.",
+    "sources": [
+      {"title": "Invest Korea banking-service guide", "url": "https://www.investkorea.org/ik-en/cntnts/i-5056/web.do"},
+      {"title": "Invest Korea account-opening document guide", "url": "https://www.investkorea.org/file/ik-en/2.%20How%20Foreigners%20Can%20Open%20a%20Bank%20Account%20in%20Korea_eng.pdf"}
+    ]
+  },
+  {
+    "country": "El Salvador",
+    "process_name": "Opening a Personal Deposit Account in El Salvador",
+    "steps": [
+      "Choose between a regular savings, current, term, or simplified-requirements account",
+      "Compare each institution's opening minimum, fees, and available channels",
+      "Apply at a branch or through the bank's supported digital channel",
+      "Provide the identity and contact information required for that account type",
+      "Complete the institution's customer verification",
+      "Make the opening deposit when required",
+      "Activate the debit card, transfers, and digital banking included with the product"
+    ],
+    "typical_requirements": ["Documento Único de Identidad or other accepted ID", "Mobile number and contact information", "Additional KYC information for regular accounts", "Opening deposit if required"],
+    "notes": "The SSF notes that requirements and minimum deposits vary by institution. A simplified-requirements savings account can generally be opened with minimal identification and has special limits disclosed by the bank.",
+    "sources": [
+      {"title": "SSF guidance on simplified and regular savings accounts", "url": "https://edufinanciera.ssf.gob.sv/diferenciacion-entre-cars-y-otras-cuentas-de-ahorro/"},
+      {"title": "SSF FAQ on account-opening minimums", "url": "https://ssf.gob.sv/preguntas-frecuentes/en-que-tipo-de-cuentas-de-ahorro-me-solicitan-monto-minimo-de-apertura-y-cuales-no/"}
+    ]
+  },
+  {
+    "country": "Dominican Republic",
+    "process_name": "Opening a Personal Deposit Account in the Dominican Republic",
+    "steps": [
+      "Choose a savings, current, basic, or fixed-term product",
+      "Check whether the product supports online opening or requires a branch",
+      "Complete and sign the account application",
+      "Provide a cédula or passport as accepted for the product and customer status",
+      "Provide income information and additional customer-due-diligence documents when requested",
+      "Make the minimum opening deposit if the product requires one",
+      "Activate the debit card and digital-banking access offered"
+    ],
+    "typical_requirements": ["Cédula or passport", "Completed application", "Income evidence when required", "Contact and residence information", "Opening deposit if required"],
+    "notes": "Requirements differ between standard and basic/inclusive accounts and between residents and non-residents. Institutions may request additional documents to identify the customer and source of funds.",
+    "sources": [
+      {"title": "Banreservas savings-account requirements", "url": "https://banreservas.com/personal/cuentas/cuenta-de-ahorro-en-pesos/"},
+      {"title": "Banco Popular customer-onboarding requirements", "url": "https://popularenlinea.com/Personas/Paginas/nosotros/Requerimientos-para-vinculacion.aspx"}
+    ]
+  },
+  {
+    "country": "United Kingdom",
+    "process_name": "Opening a Personal Bank Account in the United Kingdom",
+    "steps": [
+      "Compare current accounts, basic bank accounts, and savings accounts",
+      "Choose a bank or building society and check its application channels",
+      "Complete the application with personal, contact, tax-residency, and account-purpose information",
+      "Provide acceptable proof of identity",
+      "Provide proof of address if requested by the institution",
+      "Complete identity, fraud-prevention, and eligibility checks",
+      "Activate the debit card, online banking, and payment instructions"
+    ],
+    "typical_requirements": ["Proof of identity, such as a passport or accepted identity card", "Personal and contact information", "Proof of address if requested", "Tax-residency information", "Additional bank-specific verification"],
+    "notes": "UK government guidance notes that banks may ask for proof of address, although it is not itself a legal prerequisite to opening every bank account. Basic bank accounts may offer alternative identity-evidence routes.",
+    "sources": [
+      {"title": "GOV.UK guidance on opening a UK bank account", "url": "https://www.gov.uk/guidance/supporting-guests-to-open-a-bank-account-homes-for-ukraine"},
+      {"title": "GOV.UK basic bank account guide", "url": "https://send-money-to-prisoner.service.gov.uk/en-gb/help/setup-basic-bank-account/"}
+    ]
+  }
+]

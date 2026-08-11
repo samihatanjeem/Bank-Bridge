@@ -1,10 +1,12 @@
 # Dataset Notes
 
-The files in `/data` contain a compact reviewed seed set. Each factual record
+The files in `/data` contain a compact reviewed seed set. The original three
+markets and the seven-country expansion are split into base and `additional_`
+JSON files for maintainability; the loader combines them. Each factual record
 links to a regulator, government agency, or first-party bank page. Review the
 links before production releases because products and regulations can change.
 
-## `financial_products.json`
+## `financial_products.json` and `additional_financial_products.json`
 
 | Field | Meaning |
 |---|---|
@@ -19,10 +21,11 @@ links before production releases because products and regulations can change.
 | `difference_notes` | Material limits of the analogy |
 | `sources` | Source objects containing `title` and direct `url` |
 
-## `account_opening_process.json`
+## Account-opening process files
 
-Each record contains a country, process label, ordered steps, typical
-requirements, qualifications in `notes`, and a `sources` list.
+`account_opening_process.json` and `additional_account_opening_process.json`
+use the same schema. Each record contains a country, process label, ordered
+steps, typical requirements, qualifications in `notes`, and a `sources` list.
 
 ## How the classifier uses the data
 

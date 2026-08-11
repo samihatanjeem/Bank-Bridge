@@ -1,8 +1,8 @@
 """Small, explainable text classifier for local-to-US product mappings.
 
-The model is trained from the reviewed records in ``financial_products.json``
-at runtime.  This keeps the training data and the user-facing evidence in one
-place and avoids committing an opaque binary model.
+The model is trained from the reviewed product records loaded from ``data/``
+at runtime. This keeps training text and user-facing evidence together and
+avoids committing an opaque binary model.
 """
 
 import math

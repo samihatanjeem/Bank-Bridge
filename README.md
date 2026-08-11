@@ -8,10 +8,11 @@ privacy-first guide for understanding and safely sharing bank statements.
 
 ## Status
 
-The term and process pages use a sourced seed dataset for Bangladesh, India,
-the Philippines, and US reference categories. Free-text product mapping uses
-an explainable multinomial Naive Bayes classifier with a low-confidence
-fallback. The interface is organized around three practical user journeys.
+The term and process pages use sourced seed data for 10 origin countries:
+Bangladesh, China, the Dominican Republic, El Salvador, India, Mexico, the
+Philippines, South Korea, the United Kingdom, and Vietnam. Free-text mapping
+uses an explainable multinomial Naive Bayes classifier with a low-confidence
+fallback.
 
 ## Project structure
 
@@ -28,7 +29,9 @@ bank-bridge/
 │   └── ai_helper.py
 ├── data/
 │   ├── financial_products.json
-│   └── account_opening_process.json
+│   ├── additional_financial_products.json
+│   ├── account_opening_process.json
+│   └── additional_account_opening_process.json
 ├── tests/
 └── DATASET_NOTES.md
 ```
@@ -61,7 +64,7 @@ See `DATASET_NOTES.md` before adding records or categories.
 
 - The seed mappings need domain-expert review before production use.
 - The statement guide validates file readiness but does not read or translate documents.
-- Coverage is currently limited to three origin countries.
+- Coverage is a curated seed set rather than a complete catalog of each market.
 - Model confidence is a routing heuristic, not a calibrated probability.
 
 ## Disclaimer

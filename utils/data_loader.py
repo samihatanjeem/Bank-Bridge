@@ -16,13 +16,19 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 def load_financial_products() -> list[dict]:
     """Load the full financial products dataset."""
     with open(DATA_DIR / "financial_products.json", encoding="utf-8") as f:
-        return json.load(f)
+        products = json.load(f)
+    with open(DATA_DIR / "additional_financial_products.json", encoding="utf-8") as f:
+        products.extend(json.load(f))
+    return products
 
 
 def load_account_opening_process() -> list[dict]:
     """Load the full account-opening process dataset."""
     with open(DATA_DIR / "account_opening_process.json", encoding="utf-8") as f:
-        return json.load(f)
+        processes = json.load(f)
+    with open(DATA_DIR / "additional_account_opening_process.json", encoding="utf-8") as f:
+        processes.extend(json.load(f))
+    return processes
 
 
 def get_countries(products: list[dict], exclude_us: bool = True) -> list[str]:
