@@ -1,64 +1,75 @@
 [
   {
     "country": "Bangladesh",
-    "process_name": "Opening a Savings Account in Bangladesh",
+    "process_name": "Opening a Personal Deposit Account in Bangladesh",
     "steps": [
-      "Choose a bank and account type",
-      "Visit a branch in person",
-      "Provide National ID (NID) or passport, and a passport-size photo",
-      "Provide a nominee's details",
-      "Get an introducer (existing account holder to vouch for you)",
-      "Deposit the minimum opening balance",
-      "Receive a passbook and/or debit card"
+      "Choose a bank and deposit-account type",
+      "Check whether the bank supports branch opening, electronic onboarding, or both",
+      "Complete the application and provide the identity information requested by the bank",
+      "For e-KYC, complete National ID and biometric identity verification",
+      "Provide any bank-specific customer-due-diligence information",
+      "Fund the account if the selected product requires an opening deposit",
+      "Activate the available card and digital-banking tools"
     ],
-    "typical_requirements": ["National ID or passport", "Passport-size photo", "Nominee details", "Introducer/reference", "Minimum opening deposit"],
-    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
-    "source_notes": "DUMMY DATA"
+    "typical_requirements": ["Identity document", "National ID and biometric verification for e-KYC", "Contact and address information", "Bank-specific KYC/CDD information", "Opening deposit if required by the product"],
+    "notes": "Bangladesh Bank's e-KYC guidance covers electronic onboarding of natural persons and bases electronic identity verification on National ID and biometric data. Branch processes and additional due-diligence requests vary by institution.",
+    "sources": [
+      {"title": "Bangladesh Bank Guidelines on Electronic Know Your Customer", "url": "https://www.bb.org.bd/aboutus/regulationguideline/aml/jan082020_ekyc.pdf"}
+    ]
   },
   {
     "country": "India",
-    "process_name": "Opening a Savings Account in India",
+    "process_name": "Opening a Personal Deposit Account in India",
     "steps": [
       "Choose a bank and account type",
-      "Complete KYC — provide Aadhaar and PAN card",
-      "Apply online or in-branch via video KYC",
-      "Provide a passport-size photo and signature",
-      "Fund the account with the minimum balance if required",
-      "Receive a debit card and net/mobile banking access"
+      "Complete an application through a supported branch or digital channel",
+      "Provide one officially valid identity/address document or authorize retrieval of valid KYC data",
+      "Provide PAN or Form 60, as applicable",
+      "Provide a recent photograph and any additional information required under the bank's KYC policy",
+      "Complete in-person, Aadhaar-enabled, CKYC, or video verification when offered and applicable",
+      "Fund and activate the account under the selected product's terms"
     ],
-    "typical_requirements": ["Aadhaar card", "PAN card", "Passport-size photo", "Minimum balance (varies)"],
-    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
-    "source_notes": "DUMMY DATA"
+    "typical_requirements": ["One officially valid document, such as passport, driving licence, Aadhaar proof, voter ID, NREGA job card, or NPR letter", "PAN or Form 60", "Recent photograph", "Contact information", "Additional bank-specific KYC information"],
+    "notes": "RBI guidance permits multiple KYC paths and identifies several officially valid documents; Aadhaar is not the only possible identity document. Exact channel availability is bank-specific.",
+    "sources": [
+      {"title": "RBI KYC Frequently Asked Questions", "url": "https://www.rbi.org.in/SCRIPTs/FAQView.aspx?Id=173"},
+      {"title": "RBI Master Direction — Know Your Customer", "url": "https://www.rbi.org.in/scripts/BS_ViewMasCirculardetails.aspx?id=11261"}
+    ]
   },
   {
     "country": "Philippines",
-    "process_name": "Opening a Savings Account in the Philippines",
+    "process_name": "Opening a Personal Deposit Account in the Philippines",
     "steps": [
-      "Choose a bank (traditional or digital-only)",
-      "Provide at least one valid government ID",
-      "Provide Tax Identification Number (TIN) if available",
-      "Visit a branch or complete online application with selfie/video verification",
-      "Fund the account with the minimum initial deposit",
-      "Receive an ATM/debit card"
+      "Choose a bank and account type",
+      "Check whether the product can be opened online or requires a branch visit",
+      "Complete the application and provide a valid identification document",
+      "Complete the bank's identity check, which may include a selfie or video interview online",
+      "Provide customer and contact information required by the bank",
+      "Fund the account within the bank's deadline if an initial deposit is required",
+      "Activate the available card and online-banking access"
     ],
-    "typical_requirements": ["Valid government ID", "TIN (if available)", "Minimum initial deposit", "Selfie/video verification for digital banks"],
-    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
-    "source_notes": "DUMMY DATA"
+    "typical_requirements": ["Valid photo identification", "Selfie or video identity check for some online applications", "Personal mobile number and contact details", "Initial deposit if required by the product"],
+    "notes": "BSP basic deposit accounts use simplified onboarding and no maintaining balance, while regular accounts may have different requirements. BDO's published flow illustrates online and branch paths; other banks can differ.",
+    "sources": [
+      {"title": "BSP Manual of Regulations for Banks — Basic Deposit Account", "url": "https://www.bsp.gov.ph/Regulations/MORB/2023_MORB/2023_Part%20II_01%20Deposits.pdf"},
+      {"title": "BDO Optimum Savings account-opening process", "url": "https://www.bdo.com.ph/personal/accounts/savings/peso-savings/optimum-savings"}
+    ]
   },
   {
     "country": "United States",
-    "process_name": "Opening a Savings Account in the US (as a newcomer)",
+    "process_name": "Opening a Bank Account in the United States",
     "steps": [
-      "Choose a bank (traditional, credit union, or online-only)",
-      "Provide a government-issued ID (passport + visa for newcomers)",
-      "Provide SSN, ITIN, or use a bank that accepts foreign passport/visa alone",
-      "Provide a US address (some banks accept temporary/campus address)",
-      "Apply online or in-branch",
-      "Fund the account with the minimum opening deposit if required",
-      "Receive a debit card by mail or immediate digital access"
+      "Compare banks or credit unions, account features, fees, and deposit-insurance status",
+      "Gather a tax identification number and acceptable identity document",
+      "Complete an application in person, online, or in a mobile app when offered",
+      "Make the first deposit if the account requires one",
+      "Sign the required documents electronically or in person",
+      "Activate online or mobile banking and any debit or ATM card"
     ],
-    "typical_requirements": ["Government-issued ID (passport + visa)", "SSN or ITIN (or bank-specific alternative)", "US address", "Minimum opening deposit (varies)"],
-    "notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo.",
-    "source_notes": "DUMMY DATA"
+    "typical_requirements": ["Social Security number or Individual Taxpayer Identification Number when requested", "Acceptable identity document, such as a driver's license, state or military ID, or passport", "Contact information", "Opening deposit if required"],
+    "notes": "Citizenship is not universally required. FDIC notes that some banks accept alternatives such as a foreign passport, consular ID, or ITIN; acceptance is institution-specific.",
+    "sources": [
+      {"title": "FDIC GetBanked account-opening guide", "url": "https://www.fdic.gov/GetBanked"}
+    ]
   }
 ]

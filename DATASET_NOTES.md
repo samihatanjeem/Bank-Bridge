@@ -1,49 +1,52 @@
-# Dataset Notes (for Person A)
+# Dataset Notes
 
-The datasets in `/data` are currently **dummy placeholders** — small,
-illustrative, and marked `"source_notes": "DUMMY DATA"`. Replace them with
-real, sourced data before the demo.
+The files in `/data` contain a compact reviewed seed set. Each factual record
+links to a regulator, government agency, or first-party bank page. Review the
+links before production releases because products and regulations can change.
 
-## financial_products.json — schema
+## `financial_products.json`
 
-Each entry needs:
-
-| Field | What goes here |
+| Field | Meaning |
 |---|---|
-| `id` | Unique short identifier, e.g. `bd_fdr` |
-| `country` | Origin country name, or `"United States"` for US reference products |
-| `product_name_local` | Full product name |
-| `local_terms` | List of alternate names/abbreviations a user might type |
-| `description` | 1-2 sentence plain description of what the product is |
-| `key_features` | List of notable features (tenure, minimums, rates, etc.) |
-| `closest_us_equivalent` | Best-match US product name (or note if there's no clean match) |
-| `similarity_notes` | What's genuinely similar to the US equivalent |
-| `difference_notes` | What's genuinely different — this is the most valuable field, be specific |
-| `source_notes` | Where this came from (bank name, government site, etc.) |
+| `id` | Stable, unique record identifier |
+| `country` | Origin country or `United States` for reference records |
+| `product_name_local` | Full local product/category name |
+| `local_terms` | Alternate terms and abbreviations used as training text |
+| `description` | Plain description of the product mechanics |
+| `key_features` | Stable characteristics used as training text |
+| `closest_us_equivalent` | Reviewed classifier label |
+| `similarity_notes` | Basis for the functional analogy |
+| `difference_notes` | Material limits of the analogy |
+| `sources` | Source objects containing `title` and direct `url` |
 
-## account_opening_process.json — schema
+## `account_opening_process.json`
 
-| Field | What goes here |
-|---|---|
-| `country` | Country name |
-| `process_name` | Label for this process |
-| `steps` | Ordered list of steps to open the account |
-| `typical_requirements` | List of documents/requirements needed |
-| `notes` | Anything worth flagging to the user (digital vs. in-person norms, etc.) |
-| `source_notes` | Where this came from |
+Each record contains a country, process label, ordered steps, typical
+requirements, qualifications in `notes`, and a `sources` list.
 
-## Where to find real data
+## How the classifier uses the data
 
-- **Bank product pages directly** — most banks publish savings/deposit
-  product pages with features, minimums, and rates
-- **Central bank / government sites** — e.g. Bangladesh Bank, RBI (India),
-  BSP (Philippines) often publish official product category info
-- **FDIC.gov** — good source for US-side definitions and insurance details
-- Avoid forums/aggregator sites where possible; prefer the bank's own page or
-  a government source so you can cite it confidently if a judge asks
+`utils/product_classifier.py` trains a multinomial Naive Bayes text classifier
+at runtime. Names, aliases, descriptions, and key features are training text;
+`closest_us_equivalent` is the label. Keeping them together means every model
+output resolves to the reviewed evidence displayed in the UI.
 
-## Reminder
+Add varied aliases and stable mechanics rather than current rates. Every new
+US-equivalent label should have examples in more than one country where
+possible. Preserve “no direct standard equivalent” when a US analogy changes
+the underlying contract.
 
-Double check any number you plan to say out loud in the demo video —
-interest rates and minimums change, and a wrong number stated on camera is an
-easy, avoidable mistake.
+## Source strategy
+
+- Prefer central banks, regulators, deposit insurers, and official providers.
+- Use provider pages for concrete product behavior and regulators for category
+  definitions or rules.
+- Avoid promotional rate claims unless an as-of date is displayed.
+- Recheck every link and time-sensitive statement before release.
+- Add classifier regression cases under `tests/` for new categories.
+
+Run validation with:
+
+```bash
+python -m unittest discover -s tests -v
+```

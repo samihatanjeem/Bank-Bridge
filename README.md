@@ -2,99 +2,71 @@
 
 Understand your money the moment you land.
 
-Bank Bridge helps newcomers translate their home country's financial products
-and account-opening process into their closest US equivalent, and translates
-bank statements for visa/loan/apartment applications.
-
-Built for [Hackathon Name] — Financial Inclusion track (with Newcomer
-Settlement crossover).
+Bank Bridge helps newcomers translate financial-product terms and
+account-opening processes into their closest US analogies. It also contains an
+early bank-statement translation prototype.
 
 ## Status
 
-🚧 Early build. Front-end pages work against a **dummy dataset** with a
-rule-based placeholder explanation. Real AI calls and verified data are not
-wired up yet — see the TODOs below.
+The term and process pages use a sourced seed dataset for Bangladesh, India,
+the Philippines, and US reference categories. Free-text product mapping uses
+an explainable multinomial Naive Bayes classifier with a low-confidence
+fallback. Statement translation remains a clearly marked prototype.
 
 ## Project structure
 
-```
+```text
 bank-bridge/
-├── Home.py                        # Main app entry point / landing page
+├── Home.py
 ├── pages/
-│   ├── 1_Term_Translator.py       # Financial product lookup + explanation
-│   ├── 2_Process_Comparison.py    # Account-opening process comparison
-│   └── 3_Statement_Translator.py  # Bank statement upload + translation (stub)
+│   ├── 1_Term_Translator.py
+│   ├── 2_Process_Comparison.py
+│   └── 3_Statement_Translator.py
 ├── utils/
-│   ├── data_loader.py             # JSON loading + lookup helpers
-│   └── ai_helper.py                # AI explanation logic (placeholder for now)
+│   ├── data_loader.py
+│   ├── product_classifier.py
+│   └── ai_helper.py
 ├── data/
-│   ├── financial_products.json    # Dummy dataset — REPLACE before demo
-│   └── account_opening_process.json  # Dummy dataset — REPLACE before demo
-├── requirements.txt
-├── .env.example
-└── .gitignore
+│   ├── financial_products.json
+│   └── account_opening_process.json
+├── tests/
+└── DATASET_NOTES.md
 ```
 
 ## Setup
 
-1. Clone the repo and `cd` into it.
-2. Create a virtual environment (recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # on Windows: venv\Scripts\activate
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Copy the environment template and add your API key (only needed once
-   `ai_helper.py` is wired up to a real model — the app runs fine without it
-   for now, using the placeholder explanations):
-   ```bash
-   cp .env.example .env
-   ```
-5. Run the app:
-   ```bash
-   streamlit run Home.py
-   ```
-   This opens the app in your browser at `http://localhost:8501`.
+Requires Python 3.9 or newer.
 
-## Team split (Day 1)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run Home.py
+```
 
-**Person A — Data**
-- Expand `data/financial_products.json` and `data/account_opening_process.json`
-  with real, sourced data (5-8 products per country)
-- Keep the existing schema (see field descriptions in each JSON file's
-  sibling notes, or ask in Slack if unclear)
-- You can edit these files directly — no need to touch any Python code to
-  add more entries; the app reads them automatically
+## Test
 
-**Person B — AI integration**
-- Open `utils/ai_helper.py` — look for the `TODO` comments in
-  `explain_product()` and `explain_statement()`
-- Wire up a real Claude or OpenAI API call, using the existing
-  `_fallback_explanation()` and `_build_prompt()` functions as a starting
-  template
-- The front-end already calls these functions correctly — you shouldn't need
-  to touch any Streamlit page code, just the functions inside this file
+```bash
+python -m unittest discover -s tests -v
+```
 
-**Both of you can work at the same time without blocking each other** —
-Person A edits JSON files, Person B edits `ai_helper.py`, and the Streamlit
-pages already wire both together.
+The model trains from the small JSON dataset at runtime, so there is no opaque
+serialized model artifact. The training text consists of product names,
+aliases, descriptions, and stable product mechanics; the label is the reviewed
+`closest_us_equivalent`. The UI links each result back to its evidence.
 
-## Known gaps / next steps
+See `DATASET_NOTES.md` before adding records or categories.
 
-- [ ] Replace dummy data with verified data (see `DATASET_NOTES.md` for
-      sourcing guidance)
-- [ ] Wire up real LLM calls in `ai_helper.py`
-- [ ] Wire up the Statement Translator to a vision-capable model call
-- [ ] Add more countries beyond Bangladesh/India/Philippines if time allows
-- [ ] Add a disclaimer banner (informational only, not financial advice) —
-      currently only in page captions, consider making more prominent
-- [ ] Deploy to Streamlit Community Cloud for a live demo link
+## Known gaps
+
+- The seed mappings need domain-expert review before production use.
+- Statement translation is not connected to a document model.
+- Coverage is currently limited to three origin countries.
+- Model confidence is a routing heuristic, not a calibrated probability.
 
 ## Disclaimer
 
 This tool is for informational and educational purposes only. It does not
-constitute financial, legal, or immigration advice. Data is currently a
-development placeholder and has not been fully verified for accuracy.
+constitute financial, legal, tax, or immigration advice. Mappings are
+functional analogies and do not establish identical legal, insurance, tax, or
+contractual treatment.

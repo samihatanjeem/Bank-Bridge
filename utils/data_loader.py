@@ -8,6 +8,7 @@ needed for the hackathon MVP.
 
 import json
 from pathlib import Path
+from typing import Optional
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
@@ -37,7 +38,7 @@ def get_products_for_country(products: list[dict], country: str) -> list[dict]:
     return [p for p in products if p["country"] == country]
 
 
-def find_product_by_term(products: list[dict], country: str, term: str) -> dict | None:
+def find_product_by_term(products: list[dict], country: str, term: str) -> Optional[dict]:
     """
     Look up a product by matching the user's typed term (case-insensitive)
     against product_name_local and local_terms for the given country.
@@ -50,7 +51,7 @@ def find_product_by_term(products: list[dict], country: str, term: str) -> dict 
     return None
 
 
-def get_process_for_country(processes: list[dict], country: str) -> dict | None:
+def get_process_for_country(processes: list[dict], country: str) -> Optional[dict]:
     """Return the account-opening process entry for a given country."""
     for proc in processes:
         if proc["country"] == country:

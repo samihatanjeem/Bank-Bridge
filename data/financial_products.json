@@ -1,50 +1,260 @@
 [
   {
+    "id": "bd_savings",
+    "country": "Bangladesh",
+    "product_name_local": "Savings Deposit Account",
+    "local_terms": ["Savings Account", "Savings Deposit", "Sanchayi Hisab"],
+    "description": "An interest-bearing deposit account for everyday saving, with funds generally available on demand through the bank's supported channels.",
+    "key_features": ["On-demand access", "May earn interest", "ATM or branch access", "Designed for personal savings"],
+    "closest_us_equivalent": "Savings account",
+    "similarity_notes": "Both hold liquid personal savings and may pay interest while allowing withdrawals.",
+    "difference_notes": "Fees, minimum balances, access channels, and interest calculations are bank-specific in both countries; compare the actual account disclosures.",
+    "sources": [
+      {"title": "Dhaka Bank deposit rates and product categories", "url": "https://dhakabankltd.com/wp-content/uploads/2025/09/Dhaka-Bank-Deposit-Rates-Effective-From-10.09.2025.pdf"}
+    ]
+  },
+  {
+    "id": "bd_current",
+    "country": "Bangladesh",
+    "product_name_local": "Current Account",
+    "local_terms": ["Current Deposit Account", "Current Deposit", "Cholti Hisab"],
+    "description": "A transaction-focused demand deposit account used for frequent deposits, withdrawals, transfers, and business payments.",
+    "key_features": ["Frequent transactions", "Funds available on demand", "May support checks", "Often used by businesses"],
+    "closest_us_equivalent": "Checking account",
+    "similarity_notes": "Both are transaction accounts intended for routine payments and on-demand access.",
+    "difference_notes": "The term 'current account' commonly means a transaction account in Bangladesh, while US banks normally call that product a checking account.",
+    "sources": [
+      {"title": "Dhaka Bank deposit rates and product categories", "url": "https://dhakabankltd.com/wp-content/uploads/2025/09/Dhaka-Bank-Deposit-Rates-Effective-From-10.09.2025.pdf"},
+      {"title": "CFPB deposit-account categories", "url": "https://www.consumerfinance.gov/rules-policy/regulations/1030/"}
+    ]
+  },
+  {
     "id": "bd_fdr",
     "country": "Bangladesh",
     "product_name_local": "Fixed Deposit Receipt (FDR)",
-    "local_terms": ["FDR", "Fixed Deposit Receipt"],
-    "description": "A lump-sum deposit locked in for a fixed term at a fixed interest rate. No partial withdrawals; breaking early usually drops the rate to the savings account rate.",
-    "key_features": ["Lump-sum, one-time deposit", "Fixed term (1-24 months common)", "Fixed guaranteed interest rate", "Loan available against FDR"],
+    "local_terms": ["FDR", "Fixed Deposit Receipt", "Fixed Deposit"],
+    "description": "A lump-sum bank deposit held until a stated maturity date, usually in exchange for a higher return than an ordinary savings account.",
+    "key_features": ["One-time lump-sum deposit", "Fixed maturity", "Early access may reduce earnings", "May support a secured loan"],
     "closest_us_equivalent": "Certificate of Deposit (CD)",
-    "similarity_notes": "Both lock a lump sum for a fixed term at a fixed rate, and both penalize early withdrawal.",
-    "difference_notes": "US CDs are FDIC-insured up to $250,000; FDR is insured only up to BDT 200,000 under Bangladesh's deposit insurance scheme.",
-    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+    "similarity_notes": "Both place a lump sum in a bank for a defined term and may impose a cost for taking money out early.",
+    "difference_notes": "Product disclosures, renewal rules, taxation, and deposit-insurance coverage differ; a US CD is not legally identical to an FDR.",
+    "sources": [
+      {"title": "Dhaka Bank self-service deposit descriptions", "url": "https://selfbanking.dhakabank.com.bd/"},
+      {"title": "CFPB definition of certificate of deposit", "url": "https://www.consumerfinance.gov/consumer-tools/bank-accounts/answers/key-terms/"}
+    ]
+  },
+  {
+    "id": "bd_dps",
+    "country": "Bangladesh",
+    "product_name_local": "Deposit Pension Scheme (DPS)",
+    "local_terms": ["DPS", "Deposit Pension Scheme", "Monthly Deposit Scheme", "Installment Savings"],
+    "description": "A goal-based deposit plan funded with a fixed installment each month for an agreed period.",
+    "key_features": ["Regular monthly deposits", "Fixed savings period", "Goal-based accumulation", "Missed-installment rules may apply"],
+    "closest_us_equivalent": "Goal-based recurring savings (no direct standard US equivalent)",
+    "similarity_notes": "The nearest US behavior is an automatic monthly transfer into a goal-based savings account.",
+    "difference_notes": "A DPS is a packaged contractual deposit scheme; automatic transfers to a normal US savings account generally do not create the same fixed installment and maturity contract.",
+    "sources": [
+      {"title": "Dhaka Bank DPS description", "url": "https://selfbanking.dhakabank.com.bd/"}
+    ]
+  },
+  {
+    "id": "bd_sds",
+    "country": "Bangladesh",
+    "product_name_local": "Special Deposit Scheme (Monthly Income)",
+    "local_terms": ["SDS", "Monthly Income Scheme", "MIS", "Monthly Benefit Scheme"],
+    "description": "A term deposit funded with a lump sum that distributes earnings periodically during the term.",
+    "key_features": ["Lump-sum deposit", "Defined term", "Periodic interest or profit payout", "Principal remains deposited until maturity"],
+    "closest_us_equivalent": "Certificate of Deposit (CD)",
+    "similarity_notes": "The principal is committed for a term, like a CD; some US CDs also distribute interest periodically.",
+    "difference_notes": "Payout schedules, early-withdrawal treatment, and renewal terms depend on the specific institution and are not implied by the mapping.",
+    "sources": [
+      {"title": "Dhaka Bank Special Deposit Scheme description", "url": "https://selfbanking.dhakabank.com.bd/"}
+    ]
+  },
+  {
+    "id": "in_savings",
+    "country": "India",
+    "product_name_local": "Savings Bank Account",
+    "local_terms": ["Savings Account", "Savings Deposit", "SB Account", "Bachat Khata"],
+    "description": "A bank account for day-to-day surplus funds that permits withdrawals and commonly provides digital banking and debit-card access.",
+    "key_features": ["On-demand withdrawals", "May earn interest", "Debit card and digital banking", "Personal savings"],
+    "closest_us_equivalent": "Savings account",
+    "similarity_notes": "Both are liquid deposit accounts primarily used to hold personal savings.",
+    "difference_notes": "Withdrawal rules, minimum balances, payment features, and interest methods vary by institution; compare the individual product terms.",
+    "sources": [
+      {"title": "RBI financial education guide on deposit types", "url": "https://www.rbi.org.in/financialeducation/content/GUIDE310113_F.pdf"},
+      {"title": "SBI Savings Bank Account", "url": "https://sbi.co.in/web/personal-banking/accounts/saving-account/savings-bank-account"}
+    ]
+  },
+  {
+    "id": "in_current",
+    "country": "India",
+    "product_name_local": "Current Account",
+    "local_terms": ["Current Deposit", "Current Deposit Account", "CA Account", "Chalu Khata"],
+    "description": "A demand deposit account designed for frequent payments and withdrawals, commonly used for business activity.",
+    "key_features": ["High transaction frequency", "Withdrawable on demand", "Business payment use", "May offer overdraft facilities"],
+    "closest_us_equivalent": "Checking account",
+    "similarity_notes": "Both are designed to move money and make routine payments rather than lock savings for a term.",
+    "difference_notes": "Indian banks use 'current account' where US consumer banks usually use 'checking account'; eligibility and fees remain institution-specific.",
+    "sources": [
+      {"title": "RBI definition of current account", "url": "https://www.rbi.org.in/scripts/BS_ViewMasterCirculars.aspx?Id=6512"},
+      {"title": "CFPB deposit-account categories", "url": "https://www.consumerfinance.gov/rules-policy/regulations/1030/"}
+    ]
   },
   {
     "id": "in_fd",
     "country": "India",
     "product_name_local": "Fixed Deposit (FD)",
     "local_terms": ["FD", "Fixed Deposit", "Term Deposit"],
-    "description": "A lump-sum deposit for a fixed tenure at a fixed interest rate, with principal and interest paid at maturity.",
-    "key_features": ["Lump-sum deposit", "Tenure from 7 days to 10 years", "Fixed interest rate for the term", "TDS applies above a threshold"],
+    "description": "A lump-sum deposit placed with a bank for a chosen fixed period, normally with reduced earnings if withdrawn before maturity.",
+    "key_features": ["Lump-sum deposit", "Fixed tenure", "Stated maturity", "Premature-withdrawal terms"],
     "closest_us_equivalent": "Certificate of Deposit (CD)",
-    "similarity_notes": "Same core mechanic: lock a lump sum for a fixed term at a fixed guaranteed rate.",
-    "difference_notes": "Indian FD interest is subject to TDS withheld directly by the bank; US CD interest is reported via 1099-INT and taxed at annual filing.",
-    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+    "similarity_notes": "Both use a lump-sum deposit, a stated term, and an early-withdrawal consequence.",
+    "difference_notes": "Tax reporting, automatic renewal, insurance, and premature-withdrawal rules differ between institutions and countries.",
+    "sources": [
+      {"title": "RBI financial education guide on term deposits", "url": "https://www.rbi.org.in/financialeducation/content/GUIDE310113_F.pdf"},
+      {"title": "CFPB definition of certificate of deposit", "url": "https://www.consumerfinance.gov/consumer-tools/bank-accounts/answers/key-terms/"}
+    ]
+  },
+  {
+    "id": "in_rd",
+    "country": "India",
+    "product_name_local": "Recurring Deposit (RD)",
+    "local_terms": ["RD", "Recurring Deposit", "Monthly Recurring Deposit"],
+    "description": "A deposit plan that builds savings through a fixed amount paid at regular intervals for a set period.",
+    "key_features": ["Regular installments", "Fixed savings period", "Maturity proceeds", "Late-installment rules may apply"],
+    "closest_us_equivalent": "Goal-based recurring savings (no direct standard US equivalent)",
+    "similarity_notes": "The nearest common US practice is scheduling automatic transfers into a savings goal.",
+    "difference_notes": "An Indian RD is a defined deposit product with installment and maturity terms; an ordinary US automatic savings plan is usually just a transfer instruction.",
+    "sources": [
+      {"title": "SBI Recurring Deposit", "url": "https://sbi.co.in/web/personal-banking/investments-deposits/deposits/recurring-deposit"},
+      {"title": "RBI financial education guide on recurring deposits", "url": "https://www.rbi.org.in/financialeducation/content/GUIDE310113_F.pdf"}
+    ]
+  },
+  {
+    "id": "in_bsbda",
+    "country": "India",
+    "product_name_local": "Basic Savings Bank Deposit Account (BSBDA)",
+    "local_terms": ["BSBDA", "Basic Savings Account", "No Frills Account", "Zero Balance Account"],
+    "description": "A basic, KYC-compliant savings account intended to provide essential deposit and payment services without a minimum-balance requirement.",
+    "key_features": ["No minimum balance", "Basic debit card", "Essential transactions", "Financial-inclusion design"],
+    "closest_us_equivalent": "Low-cost basic bank account",
+    "similarity_notes": "The nearest US comparison is a certified low-cost or checkless account designed around essential transactions and transparent fees.",
+    "difference_notes": "BSBDA is an RBI-defined Indian account category; the US comparison is a functional analogy, not the same regulatory product.",
+    "sources": [
+      {"title": "SBI Basic Savings Bank Deposit Account", "url": "https://sbi.co.in/web/personal-banking/accounts/saving-account/basic-saving-bank-deposit-account-branch-channel"},
+      {"title": "FDIC GetBanked low-cost account guidance", "url": "https://www.fdic.gov/GetBanked"}
+    ]
+  },
+  {
+    "id": "ph_savings",
+    "country": "Philippines",
+    "product_name_local": "Regular Savings Account",
+    "local_terms": ["Savings Account", "Savings Deposit", "Peso Savings", "Passbook Savings"],
+    "description": "An interest-bearing deposit account with funds withdrawable on demand through supported bank channels such as a passbook, ATM, or online banking.",
+    "key_features": ["On-demand access", "May earn interest", "Passbook or ATM access", "Personal saving"],
+    "closest_us_equivalent": "Savings account",
+    "similarity_notes": "Both keep personal savings liquid and may earn interest.",
+    "difference_notes": "Maintaining-balance rules, access methods, and fees vary by product and may differ from common US savings accounts.",
+    "sources": [
+      {"title": "BSP Financial Reporting Package deposit definitions", "url": "https://www.bsp.gov.ph/Regulations/FRPReportFormatsAndSchedules/FRP_MoA.pdf"},
+      {"title": "BDO account categories", "url": "https://www.bdo.com.ph/personal/accounts"}
+    ]
+  },
+  {
+    "id": "ph_demand",
+    "country": "Philippines",
+    "product_name_local": "Demand Deposit / Checking Account",
+    "local_terms": ["Demand Deposit", "Checking Account", "Current Account", "Checking"],
+    "description": "A transaction deposit account subject to withdrawal by check and other available banking channels.",
+    "key_features": ["Check writing", "On-demand withdrawals", "Payment transactions", "Statement or passbook monitoring"],
+    "closest_us_equivalent": "Checking account",
+    "similarity_notes": "Both are transaction accounts supporting checks and routine payments.",
+    "difference_notes": "Account-opening minimums, check practices, fees, and interest treatment depend on the specific bank product.",
+    "sources": [
+      {"title": "BSP Financial Reporting Package deposit definitions", "url": "https://www.bsp.gov.ph/Regulations/FRPReportFormatsAndSchedules/FRP_MoA.pdf"},
+      {"title": "BDO checking-account description", "url": "https://www.bdo.com.ph/personal/accounts"}
+    ]
   },
   {
     "id": "ph_time_deposit",
     "country": "Philippines",
     "product_name_local": "Time Deposit",
-    "local_terms": ["Time Deposit", "TD"],
-    "description": "A lump-sum deposit locked for a fixed term at a fixed interest rate, with a 20% final withholding tax on interest.",
-    "key_features": ["Lump-sum deposit", "Term from 30 days to 5 years", "Fixed rate, typically 1.5%-4.0% p.a.", "20% final withholding tax on interest"],
+    "local_terms": ["Time Deposit", "TD", "Certificate of Time Deposit"],
+    "description": "An interest-bearing lump-sum deposit with a specified maturity date.",
+    "key_features": ["Lump-sum deposit", "Specific maturity", "Fixed term", "Early-withdrawal conditions"],
     "closest_us_equivalent": "Certificate of Deposit (CD)",
-    "similarity_notes": "Same core mechanic: lump sum locked for a fixed term at a fixed rate.",
-    "difference_notes": "Philippine time deposit interest is taxed automatically at the bank; US CD interest is reported for the holder to pay tax on annually.",
-    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+    "similarity_notes": "Both hold a lump sum until a specified maturity and commonly limit early access.",
+    "difference_notes": "Withholding tax, insurance, rates, documentation, and early-withdrawal rules differ; review the specific disclosures.",
+    "sources": [
+      {"title": "BSP Financial Reporting Package deposit definitions", "url": "https://www.bsp.gov.ph/Regulations/FRPReportFormatsAndSchedules/FRP_MoA.pdf"},
+      {"title": "BDO time-deposit category", "url": "https://www.bdo.com.ph/personal/accounts"}
+    ]
+  },
+  {
+    "id": "ph_bda",
+    "country": "Philippines",
+    "product_name_local": "Basic Deposit Account (BDA)",
+    "local_terms": ["BDA", "Basic Deposit", "Basic Bank Account", "No Maintaining Balance Account"],
+    "description": "A simplified deposit account designed for financial inclusion, with easy opening, no maintaining balance, and a capped balance under BSP rules.",
+    "key_features": ["Simplified onboarding", "No maintaining balance", "Balance cap", "Basic transaction access"],
+    "closest_us_equivalent": "Low-cost basic bank account",
+    "similarity_notes": "Both focus on affordable access to core deposit and payment services.",
+    "difference_notes": "The Philippine BDA has BSP-defined features and limits; US low-cost accounts use different standards and do not reproduce the BDA rules.",
+    "sources": [
+      {"title": "BSP Manual of Regulations for Banks — Basic Deposit Account", "url": "https://www.bsp.gov.ph/Regulations/MORB/2023_MORB/2023_Part%20II_01%20Deposits.pdf"},
+      {"title": "FDIC GetBanked low-cost account guidance", "url": "https://www.fdic.gov/GetBanked"}
+    ]
+  },
+  {
+    "id": "ph_now",
+    "country": "Philippines",
+    "product_name_local": "Negotiable Order of Withdrawal (NOW) Account",
+    "local_terms": ["NOW Account", "Negotiable Order of Withdrawal", "Interest-Bearing Checking"],
+    "description": "An interest-bearing deposit account from which funds can be withdrawn using negotiable orders of withdrawal.",
+    "key_features": ["Transaction access", "May pay interest", "Negotiable withdrawal orders", "Deposit account"],
+    "closest_us_equivalent": "Interest-bearing checking account",
+    "similarity_notes": "Both combine transaction access with the possibility of earning interest.",
+    "difference_notes": "The legal form, permitted instruments, eligibility, rates, and fees are governed by different national rules.",
+    "sources": [
+      {"title": "BSP Financial Reporting Package deposit definitions", "url": "https://www.bsp.gov.ph/Regulations/FRPReportFormatsAndSchedules/FRP_MoA.pdf"},
+      {"title": "CFPB guidance on interest-bearing checking", "url": "https://www.consumerfinance.gov/ask-cfpb/should-i-get-a-checking-account-that-pays-interest-en-925/"}
+    ]
+  },
+  {
+    "id": "us_savings",
+    "country": "United States",
+    "product_name_local": "Savings Account",
+    "local_terms": ["Savings", "Bank Savings Account"],
+    "description": "A deposit account used to hold accessible savings and potentially earn interest.",
+    "key_features": ["Liquid savings", "May earn interest", "Bank-specific transaction terms", "Deposit disclosures"],
+    "closest_us_equivalent": "N/A (US reference product)",
+    "similarity_notes": "N/A",
+    "difference_notes": "N/A",
+    "sources": [{"title": "CFPB bank accounts and services", "url": "https://www.consumerfinance.gov/consumer-tools/bank-accounts/"}]
+  },
+  {
+    "id": "us_checking",
+    "country": "United States",
+    "product_name_local": "Checking Account",
+    "local_terms": ["Checking", "Demand Deposit Account", "DDA"],
+    "description": "A demand deposit account used for everyday transactions such as debit-card purchases, checks, transfers, and bill payments.",
+    "key_features": ["Routine payments", "On-demand access", "Debit or check access", "Possible overdraft or NSF terms"],
+    "closest_us_equivalent": "N/A (US reference product)",
+    "similarity_notes": "N/A",
+    "difference_notes": "N/A",
+    "sources": [{"title": "CFPB bank accounts and services", "url": "https://www.consumerfinance.gov/consumer-tools/bank-accounts/"}]
   },
   {
     "id": "us_cd",
     "country": "United States",
     "product_name_local": "Certificate of Deposit (CD)",
-    "local_terms": ["CD", "Certificate of Deposit"],
-    "description": "A lump-sum deposit locked for a fixed term at a fixed interest rate, with an early-withdrawal penalty.",
-    "key_features": ["Lump-sum deposit", "Fixed term, fixed rate", "FDIC-insured up to $250,000", "Early withdrawal penalty"],
+    "local_terms": ["CD", "Certificate of Deposit", "Time Deposit"],
+    "description": "A special type of savings account in which funds generally remain for a specified period to avoid an early-withdrawal penalty.",
+    "key_features": ["Specified term", "Maturity date", "Early-withdrawal penalty may apply", "Deposit account"],
     "closest_us_equivalent": "N/A (US reference product)",
     "similarity_notes": "N/A",
     "difference_notes": "N/A",
-    "source_notes": "DUMMY DATA — placeholder for development. Replace with verified data before demo."
+    "sources": [{"title": "CFPB bank-account key terms", "url": "https://www.consumerfinance.gov/consumer-tools/bank-accounts/answers/key-terms/"}]
   }
 ]

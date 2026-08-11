@@ -48,8 +48,16 @@ if origin_process:
     if us_process:
         st.write(us_process.get("notes", ""))
 
+    with st.expander("Sources"):
+        for process in [origin_process, us_process]:
+            if not process:
+                continue
+            st.markdown(f"**{process['country']}**")
+            for source in process.get("sources", []):
+                st.markdown(f"- [{source['title']}]({source['url']})")
+
 st.markdown("---")
 st.caption(
-    "Data source: dummy dataset for development. Not verified for accuracy — "
-    "do not use for real financial decisions yet."
+    "Informational overview only. Requirements vary by bank and customer; "
+    "confirm the current process with the institution."
 )

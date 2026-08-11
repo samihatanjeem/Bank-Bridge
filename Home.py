@@ -34,22 +34,22 @@ translates bank statements for visa, loan, or apartment applications.
 )
 
 st.info(
-    "⚠️ This app currently uses a **dummy dataset** covering Bangladesh, "
-    "India, and the Philippines with a small number of sample products. "
-    "Expand `data/financial_products.json` and "
-    "`data/account_opening_process.json` with verified data before the demo."
+    "The product mapper uses a small, sourced dataset covering Bangladesh, "
+    "India, and the Philippines. It can classify a local name or short product "
+    "description, and it declines low-confidence matches."
 )
 
 st.markdown(
     """
-### For the team
+### How mappings are made
 
-- **Person A:** expand the datasets in `/data` — see `DATASET_NOTES.md`
-- **Person B:** wire up the real AI calls in `utils/ai_helper.py` — look for
-  the `TODO` comments
+- Product names, aliases, descriptions, and mechanics are drawn from the
+  cited regulator and provider pages in the dataset.
+- An explainable text classifier routes the input to a reviewed US category.
+- The displayed comparison comes from the matching evidence record rather
+  than being generated freely.
 
-Both of you can work independently: the front-end pages already work against
-the dummy data and a rule-based placeholder explanation, so nothing blocks
-either of you from testing your part right now.
+Mappings are educational analogies, not claims that products are legally or
+financially identical.
 """
 )

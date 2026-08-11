@@ -1,0 +1,64 @@
+import json
+import unittest
+from pathlib import Path
+
+from utils.data_loader import (
+    find_product_by_term,
+    get_process_for_country,
+    load_account_opening_process,
+    load_financial_products,
+)
+from utils.product_classifier import classify_product
+
+
+ROOT = Path(__file__).parent.parent
+
+
+class DatasetTests(unittest.TestCase):
+    def test_json_files_are_valid(self):
+        for filename in ["financial_products.json", "account_opening_process.json"]:
+            with open(ROOT / "data" / filename, encoding="utf-8") as data_file:
+                self.assertIsInstance(json.load(data_file), list)
+
+    def test_every_supported_country_has_five_products_and_sources(self):
+        products = load_financial_products()
+        for country in ["Bangladesh", "India", "Philippines"]:
+            records = [product for product in products if product["country"] == country]
+            self.assertGreaterEqual(len(records), 5)
+            self.assertTrue(all(product.get("sources") for product in records))
+
+    def test_optional_lookups_work_on_python_39(self):
+        products = load_financial_products()
+        processes = load_account_opening_process()
+        self.assertEqual(find_product_by_term(products, "Bangladesh", "FDR")["id"], "bd_fdr")
+        self.assertIsNone(find_product_by_term(products, "Bangladesh", "unknown"))
+        self.assertEqual(get_process_for_country(processes, "India")["country"], "India")
+
+
+class ClassifierTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.products = load_financial_products()
+
+    def assert_mapping(self, country, query, expected_equivalent):
+        result = classify_product(self.products, country, query)
+        self.assertIsNotNone(result.product)
+        self.assertEqual(result.us_equivalent, expected_equivalent)
+
+    def test_exact_abbreviation(self):
+        self.assert_mapping("Bangladesh", "DPS", "Goal-based recurring savings (no direct standard US equivalent)")
+
+    def test_description_to_cd(self):
+        self.assert_mapping("Philippines", "deposit until a fixed maturity", "Certificate of Deposit (CD)")
+
+    def test_description_to_checking(self):
+        self.assert_mapping("Philippines", "write checks for bills", "Checking account")
+
+    def test_unknown_text_is_not_presented_as_a_match(self):
+        result = classify_product(self.products, "India", "gibberish quux")
+        self.assertIsNone(result.product)
+        self.assertEqual(result.method, "low_confidence")
+
+
+if __name__ == "__main__":
+    unittest.main()
