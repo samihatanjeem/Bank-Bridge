@@ -1,4 +1,4 @@
-"""Small, explainable text classifier for local-to-US product mappings.
+"""Small, explainable text classifier for cross-country product mappings.
 
 The model is trained from the reviewed product records loaded from ``data/``
 at runtime. This keeps training text and user-facing evidence together and
@@ -27,6 +27,91 @@ class MappingResult:
     confidence: float
     method: str
     alternatives: List[dict]
+
+
+@dataclass
+class DestinationMatch:
+    """The reviewed destination product selected for an origin product."""
+
+    product: Optional[dict]
+    category: str
+    direct_category: bool
+
+
+CATEGORY_SUMMARIES = {
+    "savings": "Both products are designed to keep personal savings accessible without a fixed maturity.",
+    "transactions": "Both products are designed for receiving money and making routine payments or transfers.",
+    "fixed_term": "Both products commit a lump sum for a stated term and use maturity-based conditions.",
+    "recurring_savings": "Both products build a savings goal through repeated or automated contributions.",
+    "basic_account": "Both products emphasize affordable access to essential deposit and payment services.",
+}
+
+
+def product_category(product: dict) -> str:
+    """Return a country-neutral category used for destination matching."""
+    equivalent = product.get("closest_us_equivalent", "").lower()
+    product_id = product.get("id", "")
+    if product_id == "us_savings" or equivalent == "savings account":
+        return "savings"
+    if product_id in {"us_checking", "us_interest_checking"} or "checking account" in equivalent:
+        return "transactions"
+    if product_id == "us_cd" or "certificate of deposit" in equivalent:
+        return "fixed_term"
+    if product_id == "us_goal_savings" or "goal-based recurring savings" in equivalent:
+        return "recurring_savings"
+    if product_id == "us_basic_account" or "low-cost basic bank account" in equivalent:
+        return "basic_account"
+    raise ValueError(f"Product {product_id!r} has no recognized mapping category")
+
+
+def category_summary(category: str) -> str:
+    return CATEGORY_SUMMARIES[category]
+
+
+def find_destination_product(
+    products: List[dict], origin_product: dict, destination_country: str
+) -> DestinationMatch:
+    """Choose the closest reviewed product in a destination country."""
+    category = product_category(origin_product)
+    destination_products = get_products_for_country(products, destination_country)
+    direct_candidates = [
+        product for product in destination_products if product_category(product) == category
+    ]
+    candidates = direct_candidates
+    fallback_categories = {
+        "basic_account": "transactions",
+        "recurring_savings": "savings",
+    }
+    fallback_category = fallback_categories.get(category)
+    if not candidates and fallback_category:
+        candidates = [
+            product
+            for product in destination_products
+            if product_category(product) == fallback_category
+        ]
+    if not candidates:
+        return DestinationMatch(None, category, False)
+
+    origin_words = set(
+        _words(
+            " ".join(
+                [origin_product.get("description", "")]
+                + origin_product.get("key_features", [])
+            )
+        )
+    )
+
+    def mechanics_score(product: dict) -> float:
+        destination_words = set(
+            _words(
+                " ".join([product.get("description", "")] + product.get("key_features", []))
+            )
+        )
+        union = origin_words | destination_words
+        return len(origin_words & destination_words) / len(union) if union else 0.0
+
+    selected = max(candidates, key=mechanics_score)
+    return DestinationMatch(selected, category, bool(direct_candidates))
 
 
 def _words(text: str) -> List[str]:
@@ -128,7 +213,7 @@ def classify_product(
     minimum_confidence: float = 0.42,
     classifier: Optional[ProductMappingClassifier] = None,
 ) -> MappingResult:
-    """Map free text to a US category and its best matching reviewed record."""
+    """Map free text to a canonical category and its best reviewed origin record."""
     country_products = get_products_for_country(products, country)
     normalized_query = " ".join(_words(query))
     if not country_products or not normalized_query:

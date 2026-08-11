@@ -8,7 +8,11 @@ from utils.data_loader import (
     load_account_opening_process,
     load_financial_products,
 )
-from utils.product_classifier import classify_product
+from utils.product_classifier import (
+    classify_product,
+    find_destination_product,
+    product_category,
+)
 
 
 ROOT = Path(__file__).parent.parent
@@ -112,6 +116,31 @@ class ClassifierTests(unittest.TestCase):
             result.us_equivalent,
             "Goal-based recurring savings (no direct standard US equivalent)",
         )
+
+    def test_fixed_term_maps_between_non_us_countries(self):
+        origin = find_product_by_term(self.products, "Bangladesh", "FDR")
+        match = find_destination_product(self.products, origin, "United Kingdom")
+        self.assertEqual(match.product["id"], "uk_fixed_term")
+        self.assertEqual(match.category, "fixed_term")
+        self.assertTrue(match.direct_category)
+
+    def test_recurring_savings_maps_between_non_us_countries(self):
+        origin = find_product_by_term(self.products, "United Kingdom", "Regular Saver")
+        match = find_destination_product(self.products, origin, "South Korea")
+        self.assertEqual(match.product["id"], "kr_installment_savings")
+        self.assertEqual(product_category(match.product), "recurring_savings")
+
+    def test_basic_account_uses_transaction_fallback_when_needed(self):
+        origin = find_product_by_term(self.products, "India", "BSBDA")
+        match = find_destination_product(self.products, origin, "Vietnam")
+        self.assertEqual(match.product["id"], "vn_payment_account")
+        self.assertFalse(match.direct_category)
+
+    def test_recurring_savings_uses_savings_fallback_when_needed(self):
+        origin = find_product_by_term(self.products, "Bangladesh", "DPS")
+        match = find_destination_product(self.products, origin, "Philippines")
+        self.assertEqual(product_category(match.product), "savings")
+        self.assertFalse(match.direct_category)
 
 
 if __name__ == "__main__":

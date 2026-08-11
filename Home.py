@@ -6,7 +6,7 @@ from utils.ui import apply_theme, brand
 
 
 st.set_page_config(
-    page_title="BankBridge | Your banking guide in the US",
+    page_title="BankBridge | Your cross-border banking guide",
     page_icon="B",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -19,8 +19,8 @@ with left:
     st.markdown('<div class="eyebrow">Built for your next chapter</div>', unsafe_allow_html=True)
     st.markdown("# Banking shouldn't feel <span class='accent'>foreign.</span>", unsafe_allow_html=True)
     st.markdown(
-        '<div class="hero-copy">Understand US banking through the products and '
-        'processes you already know. Clear comparisons, practical steps, and '
+        '<div class="hero-copy">Understand a new banking system through the products and '
+        'processes you already know. Compare 11 destinations with clear guidance, practical steps, and '
         'sources you can trust.</div>',
         unsafe_allow_html=True,
     )
@@ -44,8 +44,8 @@ with right:
           <div class="quiet" style="margin-top:1.4rem;">Bangladesh · Fixed Deposit Receipt</div>
           <div class="result-name">FDR</div>
           <div style="height:1px;background:rgba(15,35,60,.10);margin:1.3rem 0;"></div>
-          <div class="quiet">Closest US equivalent</div>
-          <div style="font-size:1.3rem;font-weight:740;margin-top:.25rem;">Certificate of Deposit</div>
+          <div class="quiet">Closest UK equivalent</div>
+          <div style="font-size:1.3rem;font-weight:740;margin-top:.25rem;">Fixed-Term Savings Account</div>
           <p class="result-detail" style="margin-top:.8rem;">Same fixed-term idea. Different insurance, tax, and renewal rules.</p>
         </div>
         """,
@@ -58,14 +58,14 @@ cards = [
     (
         "01",
         "Translate a product",
-        "Type a familiar term like FDR, DPS, or BSBDA and see the closest US category.",
+        "Type a familiar term like FDR, DPS, or BSBDA and find its closest match in your destination.",
         "pages/1_Term_Translator.py",
         "Find a match",
     ),
     (
         "02",
         "Open your first account",
-        "Compare the documents and steps at home with what a US bank may ask for.",
+        "Compare the documents and steps at home with what a bank in your destination may ask for.",
         "pages/2_Process_Comparison.py",
         "Compare the process",
     ),

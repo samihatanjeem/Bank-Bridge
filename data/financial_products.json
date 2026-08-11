@@ -256,5 +256,29 @@
     "similarity_notes": "N/A",
     "difference_notes": "N/A",
     "sources": [{"title": "CFPB bank-account key terms", "url": "https://www.consumerfinance.gov/consumer-tools/bank-accounts/answers/key-terms/"}]
+  },
+  {
+    "id": "us_goal_savings",
+    "country": "United States",
+    "product_name_local": "Automatic Goal-Based Savings",
+    "local_terms": ["Automatic Savings", "Savings Goal", "Recurring Savings Transfer"],
+    "description": "A savings approach that uses scheduled transfers into a savings account or named savings goal.",
+    "key_features": ["Recurring transfers", "Flexible savings goal", "Accessible savings", "No standard fixed-term contract"],
+    "closest_us_equivalent": "N/A (US reference product)",
+    "similarity_notes": "N/A",
+    "difference_notes": "N/A",
+    "sources": [{"title": "CFPB savings resources", "url": "https://www.consumerfinance.gov/consumer-tools/savings/"}]
+  },
+  {
+    "id": "us_basic_account",
+    "country": "United States",
+    "product_name_local": "Low-Cost Basic Bank Account",
+    "local_terms": ["Basic Account", "Low-Cost Checking", "Checkless Checking", "Bank On Account"],
+    "description": "A low-cost transaction account focused on essential banking services and transparent fees.",
+    "key_features": ["Essential transactions", "Low or transparent cost", "Debit-card access", "May not allow overdraft"],
+    "closest_us_equivalent": "N/A (US reference product)",
+    "similarity_notes": "N/A",
+    "difference_notes": "N/A",
+    "sources": [{"title": "FDIC GetBanked low-cost account guidance", "url": "https://www.fdic.gov/GetBanked"}]
   }
 ]

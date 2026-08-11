@@ -2,17 +2,19 @@
 
 Understand your money the moment you land.
 
-BankBridge helps newcomers translate financial-product terms and
-account-opening processes into their closest US analogies. It also provides a
+BankBridge helps newcomers translate financial-product terms and compare
+account-opening processes across 11 destination markets. It also provides a
 privacy-first guide for understanding and safely sharing bank statements.
 
 ## Status
 
-The term and process pages use sourced seed data for 10 origin countries:
+The term and process pages use sourced seed data for 10 origin countries plus
+the United States as a destination market:
 Bangladesh, China, the Dominican Republic, El Salvador, India, Mexico, the
 Philippines, South Korea, the United Kingdom, and Vietnam. Free-text mapping
 uses an explainable multinomial Naive Bayes classifier with a low-confidence
-fallback.
+fallback. Users can select any covered market other than their home country as
+the destination.
 
 ## Project structure
 
@@ -55,8 +57,9 @@ python -m unittest discover -s tests -v
 
 The model trains from the small JSON dataset at runtime, so there is no opaque
 serialized model artifact. The training text consists of product names,
-aliases, descriptions, and stable product mechanics; the label is the reviewed
-`closest_us_equivalent`. The UI links each result back to its evidence.
+aliases, descriptions, and stable product mechanics. A reviewed canonical
+category then routes the result to the closest product in the chosen
+destination. The UI links both sides of each result back to their evidence.
 
 See `DATASET_NOTES.md` before adding records or categories.
 
