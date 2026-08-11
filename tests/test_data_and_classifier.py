@@ -59,6 +59,22 @@ class ClassifierTests(unittest.TestCase):
         self.assertIsNone(result.product)
         self.assertEqual(result.method, "low_confidence")
 
+    def test_cached_classifier_can_be_reused(self):
+        from utils.data_loader import get_products_for_country
+        from utils.product_classifier import ProductMappingClassifier
+
+        classifier = ProductMappingClassifier(get_products_for_country(self.products, "India"))
+        result = classify_product(
+            self.products,
+            "India",
+            "fixed monthly installment savings",
+            classifier=classifier,
+        )
+        self.assertEqual(
+            result.us_equivalent,
+            "Goal-based recurring savings (no direct standard US equivalent)",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

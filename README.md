@@ -2,16 +2,16 @@
 
 Understand your money the moment you land.
 
-Bank Bridge helps newcomers translate financial-product terms and
-account-opening processes into their closest US analogies. It also contains an
-early bank-statement translation prototype.
+BankBridge helps newcomers translate financial-product terms and
+account-opening processes into their closest US analogies. It also provides a
+privacy-first guide for understanding and safely sharing bank statements.
 
 ## Status
 
 The term and process pages use a sourced seed dataset for Bangladesh, India,
 the Philippines, and US reference categories. Free-text product mapping uses
 an explainable multinomial Naive Bayes classifier with a low-confidence
-fallback. Statement translation remains a clearly marked prototype.
+fallback. The interface is organized around three practical user journeys.
 
 ## Project structure
 
@@ -21,7 +21,7 @@ bank-bridge/
 ├── pages/
 │   ├── 1_Term_Translator.py
 │   ├── 2_Process_Comparison.py
-│   └── 3_Statement_Translator.py
+│   └── 3_Statement_Guide.py
 ├── utils/
 │   ├── data_loader.py
 │   ├── product_classifier.py
@@ -60,7 +60,7 @@ See `DATASET_NOTES.md` before adding records or categories.
 ## Known gaps
 
 - The seed mappings need domain-expert review before production use.
-- Statement translation is not connected to a document model.
+- The statement guide validates file readiness but does not read or translate documents.
 - Coverage is currently limited to three origin countries.
 - Model confidence is a routing heuristic, not a calibrated probability.
 

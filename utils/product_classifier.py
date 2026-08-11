@@ -122,7 +122,11 @@ def _name_similarity(query: str, product: dict) -> float:
 
 
 def classify_product(
-    products: List[dict], country: str, query: str, minimum_confidence: float = 0.42
+    products: List[dict],
+    country: str,
+    query: str,
+    minimum_confidence: float = 0.42,
+    classifier: Optional[ProductMappingClassifier] = None,
 ) -> MappingResult:
     """Map free text to a US category and its best matching reviewed record."""
     country_products = get_products_for_country(products, country)
@@ -153,7 +157,7 @@ def classify_product(
             [product for _, product in ranked_names[1:3]],
         )
 
-    classifier = ProductMappingClassifier(country_products)
+    classifier = classifier or ProductMappingClassifier(country_products)
     probabilities = classifier.probabilities(query)
     if not probabilities:
         return MappingResult(None, None, 0.0, "no_match", [])

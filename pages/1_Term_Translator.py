@@ -1,79 +1,133 @@
+import html
+
 import streamlit as st
 
-from utils.ai_helper import explain_product
 from utils.data_loader import get_countries, get_products_for_country, load_financial_products
-from utils.product_classifier import classify_product
+from utils.product_classifier import ProductMappingClassifier, classify_product
+from utils.ui import apply_theme, brand, page_intro, source_links
 
 
-st.set_page_config(page_title="Term Translator | Bank Bridge", page_icon="🔎")
+st.set_page_config(
+    page_title="Product Translator | BankBridge",
+    page_icon="B",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+apply_theme()
+brand()
 
-st.title("🔎 Financial Term Translator")
-st.write(
-    "Enter the name or describe a financial product from home. Bank Bridge "
-    "will map it to the closest reviewed US category."
+
+@st.cache_resource
+def product_catalog():
+    return load_financial_products()
+
+
+@st.cache_resource
+def mapping_model(country: str):
+    return ProductMappingClassifier(get_products_for_country(product_catalog(), country))
+
+
+products = product_catalog()
+page_intro(
+    "Product translator",
+    "What did you call it back home?",
+    "Enter a product name, abbreviation, or a short description. We'll show the closest US category—and where the comparison stops.",
 )
 
-products = load_financial_products()
-countries = get_countries(products)
-
-col1, col2 = st.columns(2)
-with col1:
-    origin_country = st.selectbox("Origin country", countries)
-with col2:
-    st.selectbox("Destination country", ["United States"], disabled=True)
+input_col, country_col = st.columns([1.7, 0.8], gap="medium")
+with input_col:
+    query = st.text_input(
+        "Product name or description",
+        placeholder="Try “DPS” or “I deposit the same amount every month”",
+        label_visibility="visible",
+    )
+with country_col:
+    origin_country = st.selectbox("Home country", get_countries(products))
 
 available_products = get_products_for_country(products, origin_country)
-product_labels = [product["product_name_local"] for product in available_products]
+with st.expander("Not sure what to type? Browse familiar terms"):
+    known_product = st.selectbox(
+        "Known products",
+        [""] + [product["product_name_local"] for product in available_products],
+        format_func=lambda value: value or "Choose a term",
+        label_visibility="collapsed",
+    )
 
-query = st.text_input(
-    "Product name or description",
-    placeholder="For example: DPS, current account, or monthly fixed savings plan",
-)
-known_product = st.selectbox(
-    "Or browse a reviewed product",
-    [""] + product_labels,
-    format_func=lambda value: value or "Select a product",
-)
+find_match = st.button("Find my closest US match", type="primary", use_container_width=False)
 
-if st.button("Find the US equivalent", type="primary"):
+if find_match:
     submitted_term = query.strip() or known_product
     if not submitted_term:
-        st.warning("Enter a product term or choose a reviewed product.")
+        st.warning("Add a term or choose one from the list to continue.")
     else:
-        with st.spinner("Classifying from reviewed product data..."):
-            result = classify_product(products, origin_country, submitted_term)
+        result = classify_product(
+            products,
+            origin_country,
+            submitted_term,
+            classifier=mapping_model(origin_country),
+        )
 
         if result.product is None:
-            st.warning(
-                "I couldn't map that confidently. Try a product name, abbreviation, "
-                "or a short description of how deposits and withdrawals work."
+            st.markdown('<div class="section-label">We need a little more detail</div>', unsafe_allow_html=True)
+            st.info(
+                "Describe how the account works—for example, whether you add money once "
+                "or monthly, can withdraw anytime, or use it to make payments."
             )
             if result.alternatives:
-                st.write(
-                    "Possible reviewed terms: "
-                    + ", ".join(product["product_name_local"] for product in result.alternatives)
+                st.caption(
+                    "You might mean: "
+                    + " · ".join(product["product_name_local"] for product in result.alternatives)
                 )
         else:
-            st.markdown("---")
-            if result.method == "model":
-                st.caption(
-                    f"Model routing confidence: {result.confidence:.0%}. "
-                    "This score is a routing aid, not a guarantee of equivalence."
-                )
-            st.markdown(explain_product(result.product))
+            product = result.product
+            display_equivalent = product["closest_us_equivalent"]
+            result_status = "CLOSEST US MATCH"
+            if display_equivalent.startswith("Goal-based recurring savings"):
+                display_equivalent = "Automatic goal-based savings"
+                result_status = "NO DIRECT US EQUIVALENT"
+            st.markdown('<div class="section-label">Your closest match</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div class="result-card">'
+                f'<span class="status-pill">{result_status}</span>'
+                f'<div class="quiet" style="margin-top:1.2rem;">{html.escape(product["country"])} · {html.escape(product["product_name_local"])}</div>'
+                f'<div class="result-name">{html.escape(display_equivalent)}</div>'
+                f'<p class="result-detail">{html.escape(product["description"])}</p>'
+                '</div>',
+                unsafe_allow_html=True,
+            )
 
-            sources = result.product.get("sources", [])
-            if sources:
-                with st.expander("Sources and mapping evidence"):
-                    for source in sources:
-                        st.markdown(f"- [{source['title']}]({source['url']})")
-                    st.caption(
-                        "The model is trained from the names, aliases, descriptions, "
-                        "and features in the reviewed dataset."
-                    )
+            same_col, different_col = st.columns(2, gap="medium")
+            with same_col:
+                st.markdown("### What carries over")
+                st.write(product["similarity_notes"])
+            with different_col:
+                st.markdown("### What changes in the US")
+                st.write(product["difference_notes"])
+
+            st.markdown("### Features used for this match")
+            st.markdown(
+                "".join(
+                    f'<span class="tag">{html.escape(feature)}</span>'
+                    for feature in product["key_features"]
+                ),
+                unsafe_allow_html=True,
+            )
+
+            with st.expander("Why BankBridge chose this match"):
+                match_type = "Exact term match" if result.method == "exact" else "Text model match"
+                st.write(
+                    f"**{match_type}.** The app compared your words with reviewed product "
+                    "names, aliases, descriptions, and account mechanics."
+                )
+                if result.method == "model":
+                    st.progress(result.confidence, text=f"Match strength: {result.confidence:.0%}")
+                st.caption("Match strength helps route the answer; it is not a financial probability.")
+
+            with st.expander("View sources"):
+                source_links(product.get("sources", []))
 
 st.markdown("---")
 st.caption(
-    "Informational and educational only—not financial advice. Product terms "
-    "vary by institution; verify details with the provider before acting."
+    "Educational guidance, not financial advice. Always confirm rates, fees, insurance, "
+    "tax treatment, and withdrawal rules with the institution."
 )
