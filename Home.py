@@ -18,23 +18,23 @@ supported_markets = get_countries(load_financial_products(), exclude_us=False)
 
 left, right = st.columns([1.3, 0.7], gap="large")
 with left:
-    st.markdown('<div class="eyebrow">Built for your next chapter</div>', unsafe_allow_html=True)
-    st.markdown("# Banking shouldn't feel <span class='accent'>foreign.</span>", unsafe_allow_html=True)
+    st.markdown('<div class="eyebrow">Financial inclusion for newcomers</div>', unsafe_allow_html=True)
+    st.markdown("# Your financial history shouldn't <span class='accent'>reset.</span>", unsafe_allow_html=True)
     st.markdown(
-        '<div class="hero-copy">Understand a new banking system through the products and '
-        'processes you already know. Compare 11 destinations with clear guidance, practical steps, and '
-        'sources you can trust.</div>',
+        '<div class="hero-copy">Turn a redacted financial document into a privacy-minimized '
+        'evidence profile and a sourced 30-day access plan for your destination—without '
+        'inventing a credit score.</div>',
         unsafe_allow_html=True,
     )
     cta, secondary = st.columns([1, 1.15])
     with cta:
-        st.page_link("pages/1_Term_Translator.py", label="Translate a banking term", icon=None)
+        st.page_link("pages/3_Financial_Passport.py", label="Build my Financial Passport", icon=None)
     with secondary:
-        st.page_link("pages/2_Process_Comparison.py", label="Compare account opening", icon=None)
+        st.page_link("pages/1_Term_Translator.py", label="Explore banking terms", icon=None)
     st.markdown(
-        '<div class="trust-row"><span class="trust-item">10 home countries</span>'
-        '<span class="trust-item">Sources included</span>'
-        '<span class="trust-item">No sign-up</span></div>',
+        '<div class="trust-row"><span class="trust-item">Privacy-minimized output</span>'
+        '<span class="trust-item">11 markets</span>'
+        '<span class="trust-item">No black-box score</span></div>',
         unsafe_allow_html=True,
     )
 
@@ -42,13 +42,13 @@ with right:
     st.markdown(
         """
         <div class="result-card" style="margin-top:2.2rem;padding:2rem;">
-          <span class="status-pill">EXAMPLE MATCH</span>
-          <div class="quiet" style="margin-top:1.4rem;">Bangladesh · Fixed Deposit Receipt</div>
-          <div class="result-name">FDR</div>
+          <span class="status-pill">FINANCIAL PASSPORT</span>
+          <div class="quiet" style="margin-top:1.4rem;">India → United States</div>
+          <div class="result-name">Evidence, translated.</div>
           <div style="height:1px;background:rgba(15,35,60,.10);margin:1.3rem 0;"></div>
-          <div class="quiet">Closest UK equivalent</div>
-          <div style="font-size:1.3rem;font-weight:740;margin-top:.25rem;">Fixed-Term Savings Account</div>
-          <p class="result-detail" style="margin-top:.8rem;">Same fixed-term idea. Different insurance, tax, and renewal rules.</p>
+          <div class="quiet">Privacy-safe signals</div>
+          <div style="font-size:1.15rem;font-weight:740;margin-top:.25rem;">Income pattern · Balance continuity · Document readiness</div>
+          <p class="result-detail" style="margin-top:.8rem;">A concrete access plan—not a credit score or lending decision.</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -59,24 +59,24 @@ card_columns = st.columns(3, gap="medium")
 cards = [
     (
         "01",
+        "Build your Passport",
+        "Extract safe evidence from a fictional or redacted document and leave with a portable 30-day plan.",
+        "pages/3_Financial_Passport.py",
+        "Start the safe demo",
+    ),
+    (
+        "02",
         "Translate a product",
-        "Type a familiar term like FDR, DPS, or BSBDA and find its closest match in your destination.",
+        "Type FDR, DPS, BSBDA, or describe how an account works to find its closest destination match.",
         "pages/1_Term_Translator.py",
         "Find a match",
     ),
     (
-        "02",
-        "Open your first account",
-        "Choose checking, savings, high-yield, fixed-term, or basic—then get a destination-ready checklist.",
+        "03",
+        "Open the right account",
+        "Choose checking, savings, high-yield, fixed-term, or basic and get a local opening checklist.",
         "pages/2_Process_Comparison.py",
         "Compare the process",
-    ),
-    (
-        "03",
-        "Read a statement",
-        "Learn what common statement sections mean before sharing a financial document.",
-        "pages/3_Statement_Guide.py",
-        "Open statement guide",
     ),
 ]
 for column, (number, title, copy, page, link_label) in zip(card_columns, cards):
@@ -96,9 +96,9 @@ st.markdown(
     """
     <div class="result-card">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.4rem;">
-        <div><div class="result-kicker">Grounded</div><h3>Evidence with every answer</h3><p class="result-detail">Regulator and provider sources stay one click away.</p></div>
-        <div><div class="result-kicker">Honest</div><h3>Differences stay visible</h3><p class="result-detail">A close match is never presented as an identical product.</p></div>
-        <div><div class="result-kicker">Private by default</div><h3>Explore without an account</h3><p class="result-detail">The core product and process guides require no personal data.</p></div>
+        <div><div class="result-kicker">Substantive AI</div><h3>Documents become structured evidence</h3><p class="result-detail">Vision and strict extraction do real work while direct identifiers stay out of the output.</p></div>
+        <div><div class="result-kicker">Explainable</div><h3>No mystery score</h3><p class="result-detail">Every signal shows what the document supports and how confident the extraction is.</p></div>
+        <div><div class="result-kicker">Actionable</div><h3>Evidence becomes a plan</h3><p class="result-detail">Users leave with local terminology, required documents, next steps, and sources.</p></div>
       </div>
     </div>
     """,

@@ -1,0 +1,17 @@
+FICTIONAL DEMO — NOT A REAL FINANCIAL DOCUMENT
+
+Naya Bank
+Personal Savings Statement
+Statement period: 1 July 2026 to 31 July 2026
+Currency: INR
+Account holder: DEMO USER
+Account identifier: XXXX-4821
+
+Opening balance: 184,250.00
+5 July — Salary credit — 95,000.00
+7 July — Housing payment — 28,000.00
+12 July — Utilities — 4,410.00
+18 July — Family transfer — 20,000.00
+Closing balance: 226,840.00
+
+This synthetic statement exists only to demonstrate BankBridge Passport.

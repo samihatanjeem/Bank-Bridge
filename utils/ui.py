@@ -64,6 +64,12 @@ THEME_CSS = """
     .status-pill {display:inline-block; background:#e8f8f5; color:#0f756b; border-radius:999px; padding:.38rem .66rem; font-size:.72rem; font-weight:760;}
     .beta-pill {display:inline-block; background:#edf1ff; color:#365fce; border-radius:999px; padding:.38rem .66rem; font-size:.72rem; font-weight:760;}
     .quiet {font-size:.82rem; color:#718095;}
+    .passport-hero {border-color:rgba(47,109,246,.24); background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(232,248,245,.72));}
+    .evidence-row {display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid var(--line);color:#344156;}
+    .confidence-high, .confidence-medium, .confidence-low {font-size:.68rem;font-weight:780;letter-spacing:.08em;border-radius:999px;padding:.28rem .5rem;}
+    .confidence-high {background:#e8f8f5;color:#0f756b;}
+    .confidence-medium {background:#fff4dc;color:#8b5b00;}
+    .confidence-low {background:#f7e9ed;color:#9a4359;}
 
     .stButton > button, [data-testid="stPageLink"], [data-testid="stPageLink"] a {
         border-radius:12px !important; font-weight:700 !important; min-height:2.8rem;

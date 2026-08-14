@@ -26,6 +26,9 @@ links before production releases because products and regulations can change.
 `account_opening_process.json` and `additional_account_opening_process.json`
 use the same schema. Each record contains a country, process label, ordered
 steps, typical requirements, qualifications in `notes`, and a `sources` list.
+The Financial Passport combines these reviewed requirements with extracted
+document-readiness signals. The model never generates destination rules from
+memory; the action-plan layer resolves them from these records.
 
 ## How the classifier uses the data
 
