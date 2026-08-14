@@ -22,17 +22,13 @@ apply_theme()
 brand()
 
 
-@st.cache_resource
-def product_catalog():
-    return load_financial_products()
+products = load_financial_products()
 
 
-@st.cache_resource
 def mapping_model(country: str):
-    return ProductMappingClassifier(get_products_for_country(product_catalog(), country))
+    return ProductMappingClassifier(get_products_for_country(products, country))
 
 
-products = product_catalog()
 page_intro(
     "Product translator",
     "What did you call it back home?",
@@ -59,6 +55,7 @@ with destination_col:
     destination_country = st.selectbox(
         "Destination", destination_options, index=default_destination
     )
+st.caption(f"{len(all_countries)} supported markets · Choose any destination except your home country")
 
 available_products = get_products_for_country(products, origin_country)
 with st.expander("Not sure what to type? Browse familiar terms"):

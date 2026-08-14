@@ -22,18 +22,8 @@ apply_theme()
 brand()
 
 
-@st.cache_resource
-def process_catalog():
-    return load_account_opening_process()
-
-
-@st.cache_resource
-def product_catalog():
-    return load_financial_products()
-
-
-processes = process_catalog()
-products = product_catalog()
+processes = load_account_opening_process()
+products = load_financial_products()
 countries = sorted(process["country"] for process in processes)
 
 page_intro(
@@ -57,6 +47,7 @@ with destination_col:
     destination_country = st.selectbox(
         "Destination", destination_options, index=default_destination
     )
+st.caption(f"{len(countries)} supported markets · Account guidance updates with your selection")
 
 origin_process = get_process_for_country(processes, origin_country)
 destination_process = get_process_for_country(processes, destination_country)

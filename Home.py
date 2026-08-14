@@ -2,7 +2,8 @@
 
 import streamlit as st
 
-from utils.ui import apply_theme, brand
+from utils.data_loader import get_countries, load_financial_products
+from utils.ui import apply_theme, brand, tags
 
 
 st.set_page_config(
@@ -13,6 +14,7 @@ st.set_page_config(
 )
 apply_theme()
 brand()
+supported_markets = get_countries(load_financial_products(), exclude_us=False)
 
 left, right = st.columns([1.3, 0.7], gap="large")
 with left:
@@ -85,6 +87,9 @@ for column, (number, title, copy, page, link_label) in zip(card_columns, cards):
             unsafe_allow_html=True,
         )
         st.page_link(page, label=link_label, icon=None)
+
+st.markdown('<div class="section-label">11 supported markets</div>', unsafe_allow_html=True)
+tags(supported_markets)
 
 st.markdown('<div class="section-label">Designed for clarity</div>', unsafe_allow_html=True)
 st.markdown(
